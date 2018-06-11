@@ -1,0 +1,36 @@
+.navbar-collapse.collapse {
+  background-color: grey;
+}
+.navbar-collapse.collapse a {
+  color: white;
+}
+.top-right {
+  position: absolute;
+  right: 10px;
+  top: 18px;
+}
+.top-right a {
+  color: white;
+}
+.top-right li a {
+  color: white;
+}
+.nav-active {
+  background-color: black;
+}
+.nav > li > a:focus,
+.nav > li > a:hover {
+  background-color: #fc8235;
+}
+.dropdown-menu {
+  background-color: #969696;
+}
+h1 {
+  color: #636b6f;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  margin: 10px 0 20px 0;
+}
+.page {
+  padding-top: 50px;
+}

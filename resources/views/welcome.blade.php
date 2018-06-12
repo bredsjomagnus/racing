@@ -79,8 +79,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    RACING
+                    RACING DATABAS
                 </div>
+				<center>
+					<i>Välkomstvy. Information skall läggas in. Sidan kommer vara tillänglig för alla besöker.</i>
 
                <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>

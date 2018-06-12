@@ -31,8 +31,13 @@ class DataController extends Controller
 		// $csvarray 			= explode(',', $file);
 
 		/*----------------------------*/
+		$trackdata	= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
+
+		// Skapa en assocciativ array för inputfältet.
+		$trackinputs = inputTracks($trackdata);
+
 		$data = [
-			"trackdata"			=> array_filter($csvarray),
+			"trackdata"			=> $trackdata,
 		];
 		return view('data.addtrackdata', $data);
 	}

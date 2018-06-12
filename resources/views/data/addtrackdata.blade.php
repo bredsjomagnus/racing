@@ -5,7 +5,7 @@
 @section('content')
 	<h1>ADD TRACKDATA</h1>
 	<table width="600px">
-		<form action="{{ route('addtrackdataprocess') }}" method="post" enctype="multipart/form-data">
+		<form action="{{ route('addtrackdataconfirm') }}" method="post" enctype="multipart/form-data">
 			@csrf
 			<tr>
 				<td width="20%">Select file</td>
@@ -21,6 +21,7 @@
 	<br>
 	@if(count($trackdata) > 0)
 		<h2>Vill du lägga till följande data?</h2>
+		<?php print_r($trackdata[0]); ?>
 		<table class='table'>
 		@foreach($trackdata as $row)
 			<?php $rowdata = explode(";", $row); ?>
@@ -31,6 +32,7 @@
 			</tr>
 		@endforeach
 		</table>
+		<?php print_r($trackdata[1]); ?>
 	@endif
 
 

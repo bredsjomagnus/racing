@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-	<h1>TEST RANGE</h1>
+	<h1>PHPINFO</h1>
 	<?php phpinfo(); ?>
 </div>
 @endsection

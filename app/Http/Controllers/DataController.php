@@ -17,28 +17,55 @@ class DataController extends Controller
 
 
 		$data = [
-			"trackdata"			=> [],
+			"trackinputs"			=> []
 		];
 		return view('data.addtrackdata', $data);
 	}
 
-	public function addTrackDataProcess() {
+	public function addTrackDataConfirm() {
+		$trackdata 		= new Trackdata();
 		// $trackdata			= new Trackdata();
 		// PHP_EOL build array with End Of Line as delimiter
 		// array_filter trims array so that empty elements is removed
-		$file 				= file_get_contents($_FILES['file']['tmp_name']);
-		$csvarray 			= explode(PHP_EOL, $file);
+		$file 			= file_get_contents($_FILES['file']['tmp_name']);
+		$csvarray 		= explode(PHP_EOL, $file);
 		// $csvarray 			= explode(',', $file);
 
 		/*----------------------------*/
-		$trackdata	= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
+
+		$trackimport	= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
 
 		// Skapa en assocciativ array för inputfältet.
-		$trackinputs = inputTracks($trackdata);
+		$trackinputs 	= $trackdata->inputTracks($trackimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
 
 		$data = [
-			"trackdata"			=> $trackdata,
+			"trackinputs"	=> $trackinputs
 		];
 		return view('data.addtrackdata', $data);
+	}
+
+	public function addTrackDataProcess(Request $request) {
+		$trackdata 					= new Trackdata();
+
+		$inputs = [];
+		$inputs['name'] 			= $request->input('name');
+		$inputs['speed'] 			= $request->input('speed');
+		$inputs['lap_time'] 		= $request->input('lap_time');
+		$inputs['elapsed_time'] 	= $request->input('elapsed_time');
+		$inputs['passing_time'] 	= $request->input('passing_time');
+		$inputs['hits'] 			= $request->input('hits');
+		$inputs['strength'] 		= $request->input('strength');
+		$inputs['noice'] 			= $request->input('noice');
+		$inputs['photocell_time'] 	= $request->input('photocell_time');
+		$inputs['transponder'] 		= $request->input('transponder');
+		$inputs['backup_tx']	 	= $request->input('backup_tx');
+		$inputs['backup_passing_time'] = $request->input('backup_passing_time');
+
+		$trackdata->insertTrackDataViaArrays($inputs);
+		// $data = [
+		// 	"inputs"	=> $inputs
+		// ];
+		return redirect('/home');
+
 	}
 }

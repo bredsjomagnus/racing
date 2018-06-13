@@ -1,6 +1,6 @@
 @extends('layouts.standard')
 
-@section('title', 'Groups')
+@section('title', 'Trackdata')
 
 @section('content')
 	<h1>ADD TRACKDATA</h1>
@@ -19,20 +19,24 @@
 		</form>
 	</table>
 	<br>
-	@if(count($trackdata) > 0)
+	@if(count($trackinputs) > 0)
 		<h2>Vill du lägga till följande data?</h2>
-		<?php print_r($trackdata[0]); ?>
-		<table class='table'>
-		@foreach($trackdata as $row)
-			<?php $rowdata = explode(";", $row); ?>
-			<tr>
-				@foreach($rowdata as $celldata)
-					<td>{{htmlspecialchars($celldata)}}</td>
-				@endforeach
-			</tr>
-		@endforeach
-		</table>
-		<?php print_r($trackdata[1]); ?>
+		<form action="{{ route('addtrackdataprocess') }}" method="post">
+			<input class='btn btn-primary btn-small' type="submit" name="addtrackdatabtn" value="Lägg till trackdata">
+			<br>
+			<br>
+			@csrf
+			<table class='table'>
+			@foreach($trackinputs as $row)
+				<tr>
+					@foreach($row as $key => $value)
+						<td>{{htmlspecialchars($value)}}</td>
+						<input type="hidden" name="{{$key}}[]" value="{{$value}}">
+					@endforeach
+				</tr>
+			@endforeach
+			</table>
+		</form>
 	@endif
 
 

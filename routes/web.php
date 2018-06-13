@@ -21,5 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // DataController
 Route::get('/data/addtrackdata', 'DataController@addTrackData')->name('addtrackdata');
-Route::post('/data/addtrackdataconfirm', 'DataController@addTrackDataProcess')->name('addtrackdataconfirm');
+Route::post('/data/addtrackdataconfirm', 'DataController@addTrackDataConfirm')->name('addtrackdataconfirm');
 Route::post('/data/addtrackdataprocess', 'DataController@addTrackDataProcess')->name('addtrackdataprocess');

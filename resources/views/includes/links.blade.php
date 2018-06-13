@@ -1,7 +1,7 @@
-<div class="row">
-	<div id="navbar" class="navbar">
+<div class="row mainnavbarrow">
+	<div id="navbar" class="navbar-collapse collapse">
 
-		<ul class="">
+		<ul class="nav navbar-nav mainna">
 			<li {{ Request::path() == "home" ? 'class=nav-active' : '' }}>
 				<a href="{{ route('home')}}" >DASHBOARD</a>
 			</li>

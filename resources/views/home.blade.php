@@ -11,7 +11,7 @@
 			<ul class="list-group">
 				<li class="list-group-item">
 					<span class="badge">{{$numberoftrackdata}}</span>
-					<a href="#">Trackdata</a>
+					<a href="{{ route('edittrackdata') }}">Trackdata</a>
 				</li>
 			</ul>
 		</div>

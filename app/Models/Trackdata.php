@@ -62,4 +62,10 @@ class Trackdata extends Model
 	public function getNumberOfRows() {
 		return $this::get()->count();
 	}
+
+	public function getAllTrackData() {
+		$res = $this::all();
+
+		return $res;
+	}
 }

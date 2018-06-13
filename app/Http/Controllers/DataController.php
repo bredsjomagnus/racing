@@ -66,6 +66,17 @@ class DataController extends Controller
 		// 	"inputs"	=> $inputs
 		// ];
 		return redirect('/home');
+	}
 
+	public function editTrackData() {
+		$trackdata		= new Trackdata();
+
+		$res			= $trackdata->getAllTrackData();
+
+		$data = [
+			"res"	=> $res
+		];
+
+		return view('data.edit', $data);
 	}
 }

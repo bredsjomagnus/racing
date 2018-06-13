@@ -24,3 +24,4 @@ Route::get('/phpinfo','HomeController@phpinfo')->name('phpinfo');
 Route::get('/data/addtrackdata', 'DataController@addTrackData')->name('addtrackdata');
 Route::post('/data/addtrackdataconfirm', 'DataController@addTrackDataConfirm')->name('addtrackdataconfirm');
 Route::post('/data/addtrackdataprocess', 'DataController@addTrackDataProcess')->name('addtrackdataprocess');
+Route::get('/data/edit/trackdata', 'DataController@editTrackData')->name('edittrackdata');

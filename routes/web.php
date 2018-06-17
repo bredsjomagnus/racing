@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/phpinfo','HomeController@phpinfo')->name('phpinfo');
+Route::get('/test','HomeController@test')->name('test');
 
 // DataController
 Route::get('/data/addtrackdata', 'DataController@addTrackData')->name('addtrackdata');

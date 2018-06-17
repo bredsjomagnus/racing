@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\User;
+use App\Models\Trackdata;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +14,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::get('/users', function () {
+    return User::all();
+});
+
+
+
+
+Route::get('/trackdata', function(){
+	return Trackdata::all();
+});
+Route::get('/trackdata/{id}', function($id){
+	return Trackdata::find($id);
+});
+Route::put('/trackdata/{id}', function(Request $request, $id) {
+    $trackdata = Trackdata::findOrFail($id);
+    $trackdata->update($request->all());
+
+    return $trackdata;
 });

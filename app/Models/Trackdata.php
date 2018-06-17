@@ -9,11 +9,11 @@ class Trackdata extends Model
     public function inputTracks($trackarray) {
 		$trackinputs = [];
 		$trackinputdata = [];
-		$keys = ['#', 'name', 'lap_time', 'speed', 'elapsed_time', 'passing_time', 'hits', 'strength', 'noice', 'photocell_time', 'transponder', 'backup_tx', 'backup_passing_time'];
+		$keys = ['#', 'no', 'name', 'laps', 'lead', 'lap_time', 'speed', 'elapsed_time', 'passing_time', 'hits', 'strength', 'noice', 'photocell_time', 'transponder', 'backup_tx', 'backup_passing_time', 'class', 'deleted'];
 
 		foreach($trackarray as $trackrow) {
 			// BREAK UP THE ROW TO AN ARRAY
-			$rowdata = explode(";", $trackrow);
+			$rowdata = explode(",", $trackrow);
 			if(count($rowdata) == count($keys)) {
 				// THE LENGTH MUST BE THE SAME
 				for($i = 0; $i < count($keys); $i++) {
@@ -42,9 +42,12 @@ class Trackdata extends Model
 		for($i = 1; $i < count($inputs['name']); $i++) {
 			$this::insert(
 			    [
+					'no' 					=> $inputs['no'][$i],
 					'name' 					=> $inputs['name'][$i],
-					'speed'	 				=> (float)str_replace(",",".",$inputs['speed'][$i]),
+					'laps' 					=> $inputs['laps'][$i],
+					'lead' 					=> $inputs['lead'][$i],
 					'lap_time' 				=> $inputs['lap_time'][$i],
+					'speed'	 				=> (float)str_replace(",",".",$inputs['speed'][$i]),
 					'elapsed_time'		 	=> $inputs['elapsed_time'][$i],
 					'passing_time'		 	=> $inputs['passing_time'][$i],
 					'hits' 					=> $inputs['hits'][$i],
@@ -53,7 +56,9 @@ class Trackdata extends Model
 					'photocell_time' 		=> $inputs['photocell_time'][$i],
 					'transponder' 			=> $inputs['transponder'][$i],
 					'backup_tx' 			=> $inputs['backup_tx'][$i],
-					'backup_passing_time' 	=> $inputs['backup_passing_time'][$i]
+					'backup_passing_time' 	=> $inputs['backup_passing_time'][$i],
+					'class' 				=> $inputs['class'][$i],
+					'deleted' 				=> $inputs['deleted'][$i]
 				]
 			);
 		}

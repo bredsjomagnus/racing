@@ -35,4 +35,8 @@ class HomeController extends Controller
 	public function phpinfo() {
 		return view('phpinfo');
 	}
+
+	public function test() {
+		return view('data.testrange');
+	}
 }

@@ -18,9 +18,12 @@
 .nav-active {
   background-color: black;
 }
-.nav > li > a:focus,
-.nav > li > a:hover {
-  background-color: #fc8235;
+.navactive {
+  background-color: #f0e7f2;
+  color: black;
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
 }
 .dropdown-menu {
   background-color: #969696;
@@ -32,5 +35,8 @@ h1 {
   margin: 10px 0 20px 0;
 }
 .page {
+  padding-top: 50px;
+}
+.testroot {
   padding-top: 50px;
 }

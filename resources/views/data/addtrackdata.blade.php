@@ -58,7 +58,7 @@
 					</tr>
 					<tr>
 						<td width="20%">Välj fil</td>
-						<td width="80%"><input class='form-control' type="file" name="file" id="file" onchange="validateFile()" /></td>
+						<td width="80%"><input class='btn btn-default' type="file" name="file" id="file" onchange="validateFile()" /></td>
 					</tr>
 
 					<tr>

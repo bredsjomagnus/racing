@@ -78,7 +78,11 @@ let app = new Vue({
     },
   },
 	mounted() {
-		axios.get('http://localhost/pwww/Race/public/api/trackdata')
+		let url = 'http://206.81.18.153/api/trackdata';
+		if(window.location.host == 'localhost') {
+			url = 'http://localhost/pwww/Race/public/api/trackdata';
+		}
+		axios.get(url)
 			.then(response =>
 				this.res = response.data
 			);

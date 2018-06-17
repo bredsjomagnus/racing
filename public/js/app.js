@@ -13959,7 +13959,11 @@ var app = new Vue((_ref = {
 }), _defineProperty(_ref, 'mounted', function mounted() {
 	var _this2 = this;
 
-	axios.get('http://localhost/pwww/Race/public/api/trackdata').then(function (response) {
+	var url = 'http://206.81.18.153/api/trackdata';
+	if (window.location.host == 'localhost') {
+		url = 'http://localhost/pwww/Race/public/api/trackdata';
+	}
+	axios.get(url).then(function (response) {
 		return _this2.res = response.data;
 	});
 }), _ref));

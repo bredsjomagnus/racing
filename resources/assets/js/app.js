@@ -32,14 +32,16 @@ Vue.filter('capitalize', function(value){
 let app = new Vue({
 	el: '#tablevue',
 
-	data() {
-	    return {
-	        sortKey: ['name'],
-	        sortOrder: ['asc'],
-	    }
-	},
+	// data() {
+	//     return {
+	//         sortKey: 'name',
+	//         sortOrder: 'asc',
+	//     }
+	// },
 	data: {
 		search: '',
+		sortKey: 'elapsed_time',
+		sortOrder: 'asc',
 	    reverse: false,
 	    columns: ['no', 'name', 'laps', 'lead', 'lap_time', 'speed', 'elapsed_time', 'passing_time', 'hits', 'strength', 'noice', 'photocell_time', 'transponder', 'backup_tx', 'backup_passing_time', 'class', 'deleted'],
 		res: []
@@ -69,22 +71,33 @@ let app = new Vue({
 	},
 	methods: {
 		sortBy(key) {
-         if (key == this.sortKey) {
-             this.sortOrder = (this.sortOrder == 'asc') ? 'desc' : 'asc';
-         } else {
-             this.sortKey = key;
-             this.sortOrder = 'asc';
-         }
-    },
+			if (key == this.sortKey) {
+				this.sortOrder = (this.sortOrder == 'asc') ? 'desc' : 'asc';
+			} else {
+				this.sortKey = key;
+				this.sortOrder = 'asc';
+			}
+			this.getSortedRes();
+    	},
+		getSortedRes() {
+			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;
+			if(window.location.host == 'localhost') {
+				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;;
+			}
+			axios.get(url)
+				.then(response =>
+					this.res = response.data
+				);
+		}
   },
 	mounted() {
-		let url = 'http://206.81.18.153/api/trackdata';
-		if(window.location.host == 'localhost') {
-			url = 'http://localhost/pwww/Race/public/api/trackdata';
+			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;
+			if(window.location.host == 'localhost') {
+				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;;
+			}
+			axios.get(url)
+				.then(response =>
+					this.res = response.data
+				);
 		}
-		axios.get(url)
-			.then(response =>
-				this.res = response.data
-			);
-	}
 });

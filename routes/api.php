@@ -25,7 +25,12 @@ Route::get('/users', function () {
 
 
 Route::get('/trackdata', function(){
-	return Trackdata::all();
+	$sortkey = $_GET['sortkey'];
+	$sortorder = $_GET['sortorder'];
+
+	$res = Trackdata::orderBy($sortkey, $sortorder)->get();
+
+	return $res;
 });
 Route::get('/trackdata/{id}', function($id){
 	return Trackdata::find($id);

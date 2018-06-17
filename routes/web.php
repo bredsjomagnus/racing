@@ -23,6 +23,8 @@ Route::get('/test','HomeController@test')->name('test');
 
 // DataController
 Route::get('/data/addtrackdata', 'DataController@addTrackData')->name('addtrackdata');
+Route::get('/data/addrace', 'DataController@addRace')->name('addrace');
+Route::post('/data/addraceprocess', 'DataController@addRaceProcess')->name('addraceprocess');
 Route::post('/data/addtrackdataconfirm', 'DataController@addTrackDataConfirm')->name('addtrackdataconfirm');
 Route::post('/data/addtrackdataprocess', 'DataController@addTrackDataProcess')->name('addtrackdataprocess');
-Route::get('/data/edit/trackdata', 'DataController@editTrackData')->name('edittrackdata');
+Route::get('/data/edit/trackdata/{id}', 'DataController@editTrackData')->name('edittrackdata');

@@ -3,8 +3,11 @@ importera.disabled = true;
 
 let havecorrectfile = false;
 let data = document.getElementById('data');
+var race = document.getElementById('raceid').value;
+console.log(race);
 var _validFileExtensions = [".csv"];
 function validateFile() {
+	console.log("raceid: " +race);
 	var sFileName = $('input[type=file]').val();
 	if (sFileName.length > 0) {
 		var blnValid = false;
@@ -15,7 +18,7 @@ function validateFile() {
 			if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
 				blnValid = true;
 				havecorrectfile = true;
-				if (havecorrectfile) {
+				if (havecorrectfile && race.length > 0) {
 					importera.disabled = false;
 				}
 				break;

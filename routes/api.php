@@ -27,11 +27,13 @@ Route::get('/users', function () {
 Route::get('/trackdata', function(){
 	$sortkey = $_GET['sortkey'];
 	$sortorder = $_GET['sortorder'];
+	$raceid = $_GET['raceid'];
 
-	$res = Trackdata::orderBy($sortkey, $sortorder)->get();
+	$res = Trackdata::where('raceid', $raceid)->orderBy($sortkey, $sortorder)->get();
 
 	return $res;
 });
+
 Route::get('/trackdata/{id}', function($id){
 	return Trackdata::find($id);
 });

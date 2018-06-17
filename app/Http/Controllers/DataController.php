@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Trackdata as Trackdata;
+use App\Models\Race as Race;
 
 class DataController extends Controller
 {
@@ -14,16 +15,21 @@ class DataController extends Controller
     }
 
 	public function addTrackData() {
+		$race = new Race();
 
+		$races = $race->getAll();
 
 		$data = [
-			"trackinputs"			=> []
+			"trackinputs"	=> [],
+			"races"			=> $races,
+			"raceid"		=> 1
 		];
 		return view('data.addtrackdata', $data);
 	}
 
-	public function addTrackDataConfirm() {
+	public function addTrackDataConfirm(Request $request) {
 		$trackdata 		= new Trackdata();
+		$race			= new Race();
 		// $trackdata			= new Trackdata();
 		// PHP_EOL build array with End Of Line as delimiter
 		// array_filter trims array so that empty elements is removed
@@ -33,13 +39,19 @@ class DataController extends Controller
 
 		/*----------------------------*/
 
+		$races			= $race->getAll();
+		$raceid 		= $request->input('raceid');
+		$raceinfo 		= $race->getRace($raceid);
 		$trackimport	= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
 
 		// Skapa en assocciativ array för inputfältet.
 		$trackinputs 	= $trackdata->inputTracks($trackimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
 
 		$data = [
-			"trackinputs"	=> $trackinputs
+			"trackinputs"	=> $trackinputs,
+			"races"			=> $races,
+			"raceid"		=> $raceid,
+			"raceinfo"		=> $raceinfo
 		];
 		return view('data.addtrackdata', $data);
 	}
@@ -65,23 +77,51 @@ class DataController extends Controller
 		$inputs['backup_passing_time'] = $request->input('backup_passing_time');
 		$inputs['class'] 			= $request->input('class');
 		$inputs['deleted'] 			= $request->input('deleted');
+		$raceid 					= $request->input('raceid');
 
-		$trackdata->insertTrackDataViaArrays($inputs);
+		$trackdata->insertTrackDataViaArrays($inputs, $raceid);
 		// $data = [
 		// 	"inputs"	=> $inputs
 		// ];
 		return redirect('/home');
 	}
 
-	public function editTrackData() {
+	public function editTrackData($id) {
 		$trackdata		= new Trackdata();
 
-		$res			= $trackdata->getAllTrackData();
+		$res			= $trackdata->getAllTrackDataByRace($id);
 
 		$data = [
 			"res"	=> $res
 		];
 
 		return view('data.edit', $data);
+	}
+
+	public function addRace() {
+
+		$data = [
+
+		];
+		return view('data.addrace', $data);
+	}
+
+	public function addRaceProcess(Request $request) {
+		$race 				= new Race();
+		$inputs['place'] 	= $request->input('place');
+		$inputs['date'] 	= $request->input('date');
+		$inputs['weather'] 	= $request->input('weather');
+		$inputs['temp'] 	= $request->input('temp');
+
+		if(isset($inputs['place']) && trim($inputs['place']) != '' && isset($inputs['date'])) {
+			$race->addRace($inputs);
+			return redirect('/home');
+		} else {
+			return redirect('/data/addrace');
+		}
+
+
+
+
 	}
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Trackdata as Trackdata;
+use App\Models\Racetrack as Racetrack;
+use App\Models\Race as Race;
 
 class HomeController extends Controller
 {
@@ -24,9 +26,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-		$trackdata = new Trackdata();
+		$race 		= new Race();
+		$trackdata 	= new Trackdata();
+		$racetrack 	= new Racetrack();
+
 		$numberoftrackdata = $trackdata->getNumberOfRows();
+
+		$races = $race->getAll();
+		$trackdataids = $racetrack->getAllTrackDataInfoByRace($races);
+
 		$data = [
+			"races"				=> $races,
+			"trackdataids"		=> $trackdataids,
 			"numberoftrackdata"	=> $numberoftrackdata
 		];
         return view('home', $data);

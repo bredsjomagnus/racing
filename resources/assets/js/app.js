@@ -32,14 +32,9 @@ Vue.filter('capitalize', function(value){
 let app = new Vue({
 	el: '#tablevue',
 
-	// data() {
-	//     return {
-	//         sortKey: 'name',
-	//         sortOrder: 'asc',
-	//     }
-	// },
 	data: {
 		search: '',
+		raceid: '',
 		sortKey: 'elapsed_time',
 		sortOrder: 'asc',
 	    reverse: false,
@@ -65,7 +60,7 @@ let app = new Vue({
 				if(row.class) {
 					ca = row.class.toLowerCase().match(this.search.toLowerCase());
 				}
-				return (na || sp || transp || ca);
+				return ( na || sp || transp || ca );
 			});
 		}
 	},
@@ -80,9 +75,9 @@ let app = new Vue({
 			this.getSortedRes();
     	},
 		getSortedRes() {
-			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;
+			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			if(window.location.host == 'localhost') {
-				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;;
+				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			}
 			axios.get(url)
 				.then(response =>
@@ -91,9 +86,13 @@ let app = new Vue({
 		}
   },
 	mounted() {
-			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;
+			let patharray = window.location.pathname.split("/");
+			this.raceid = patharray[patharray.length-1];
+
+
+			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			if(window.location.host == 'localhost') {
-				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder;;
+				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			}
 			axios.get(url)
 				.then(response =>

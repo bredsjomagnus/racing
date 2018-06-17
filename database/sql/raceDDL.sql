@@ -12,8 +12,21 @@ DROP TABLE IF EXISTS trackdatas;
 DROP TABLE IF EXISTS races;
 DROP TABLE IF EXISTS drivers;
 
+
+
+CREATE TABLE IF NOT EXISTS races (
+	id INTEGER AUTO_INCREMENT,
+    place VARCHAR(255),
+    `date` DATETIME,
+    weather VARCHAR(255),
+    temp INTEGER,
+    
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS trackdatas (
 	id INTEGER AUTO_INCREMENT,
+    raceid INTEGER,
     `no` INTEGER,
     `name` VARCHAR(255),
     laps INTEGER,
@@ -32,16 +45,7 @@ CREATE TABLE IF NOT EXISTS trackdatas (
     class VARCHAR(255),
     `deleted` VARCHAR(255),
     
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS races (
-	id INTEGER AUTO_INCREMENT,
-    place VARCHAR(255),
-    `date` DATETIME,
-    weather VARCHAR(255),
-    temp INTEGER,
-    
+    FOREIGN KEY (raceid) REFERENCES races (id),
     PRIMARY KEY (id)
 );
 

@@ -61,6 +61,8 @@ hr {
 .card {
   border: 1px solid black;
   width: 17em;
+  margin-bottom: 30px;
+  height: 125px;
 }
 .card-table {
   width: 100%;
@@ -77,6 +79,22 @@ hr {
 }
 .card-table td .text-info {
   font-size: 10px;
+}
+.card-table .racetoolsrow {
+  border-top: 1px solid gray;
+  background-color: lightblue;
+}
+.card-table .racetoolsrow .racetools {
+  height: 20px;
+  font-size: 11px;
+  padding-top: 3px;
+  padding-right: 10px;
+}
+.card-table .racetoolsrow .racetools a {
+  color: #616169;
+}
+.card-table .spacer {
+  height: 10px;
 }
 .bluecoloredrow {
   background-color: #f3f3f3;

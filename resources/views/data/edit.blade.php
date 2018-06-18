@@ -10,7 +10,7 @@
 		<br>
 		<input type="text" v-model="search" class="form-control" placeholder="Filter for name, speed, transponder and class..."/>
 
-	    <table class="table table-striped">
+	    <table class="table table-striped monoline">
 
 	      <thead>
 	        <tr>

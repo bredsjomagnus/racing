@@ -24,12 +24,13 @@ class DataController extends Controller
 			"races"			=> $races,
 			"raceid"		=> 1
 		];
-		return view('data.addtrackdata', $data);
+		return view('data.addtrackdatamylaps', $data);
 	}
 
 	public function addTrackDataConfirm(Request $request) {
 		$trackdata 		= new Trackdata();
 		$race			= new Race();
+		$filename = $_FILES['file']['name'];
 		// $trackdata			= new Trackdata();
 		// PHP_EOL build array with End Of Line as delimiter
 		// array_filter trims array so that empty elements is removed
@@ -48,12 +49,13 @@ class DataController extends Controller
 		$trackinputs 	= $trackdata->inputTracks($trackimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
 
 		$data = [
+			"filename"		=> $filename,
 			"trackinputs"	=> $trackinputs,
 			"races"			=> $races,
 			"raceid"		=> $raceid,
 			"raceinfo"		=> $raceinfo
 		];
-		return view('data.addtrackdata', $data);
+		return view('data.addtrackdatamylaps', $data);
 	}
 
 	public function addTrackDataProcess(Request $request) {

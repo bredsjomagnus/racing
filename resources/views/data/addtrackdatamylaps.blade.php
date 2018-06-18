@@ -3,9 +3,8 @@
 @section('title', 'Trackdata')
 
 @section('content')
-<br>
-<br>
-<br>
+<h3>MYLAPS</h3>
+
 <a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
   Läs mer om att lägga till via csv-fil...
 </a>
@@ -63,28 +62,29 @@
 
 					<tr>
 						<td></td>
-						<td><input class='btn btn-primary' type="submit" name="submit" value='Importera' id='importera' /></td>
+						<td style='padding-top: 5px'>
+							<input class='btn btn-primary btn-sm' type="submit" name="submit" value='Importera' id='importera' />
+						</td>
 					</tr>
 				</form>
 			</table>
 
 		</div>
 	</div>
+	<hr>
 	<div class="row">
 		<div class="col-md-12">
 			<br>
 			@if(count($trackinputs) > 0)
-				<h2>Mylaps {{count($trackinputs) - 1}} rader [Race: {{$raceinfo->date}} - {{$raceinfo->place}}]</h2>
 				<form action="{{ route('addtrackdataprocess') }}" method="post">
-					<input class='btn btn-primary btn-small' type="submit" name="addtrackdatabtn" value="Lägg till trackdata">
-					<br>
-					<br>
+					<input class='btn btn-primary btn-sm floatleft' type="submit" name="addtrackdatabtn" value="Lägg till trackdata">
+					<h4 class='bluecoloredrow monoline'>[Format: MYLAPS] [File: '{{trim(substr($filename, 0 , -4))}}' ({{count($trackinputs) - 1}} rader)]  [Race: {{$raceinfo->date}} - {{$raceinfo->place}}]</h4>
 					@csrf
 					<table class='table'>
 					@foreach($trackinputs as $row)
 						<tr>
 							@foreach($row as $key => $value)
-								<td>{{htmlspecialchars($value)}}</td>
+								<td class='monoline'>{{htmlspecialchars($value)}}</td>
 								<input type="hidden" name="{{$key}}[]" value="{{$value}}">
 							@endforeach
 						</tr>

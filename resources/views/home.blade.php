@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-		<h3>DASHBOARD</h3>
-		<p>Inlagda race i databasen. Klicka länken för att se mer detaljer kring ett race.</p>
+		<h3></h3>
+		<p class='text-muted'>Inlagda race i databasen. Klicka länken för att se mer detaljer kring ett race.</p>
     </div>
 	<div class="row">
 

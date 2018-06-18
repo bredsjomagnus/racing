@@ -22,7 +22,7 @@ Route::get('/phpinfo','HomeController@phpinfo')->name('phpinfo');
 Route::get('/test','HomeController@test')->name('test');
 
 // DataController
-Route::get('/data/addtrackdata', 'DataController@addTrackData')->name('addtrackdata');
+Route::get('/data/addtrackdata', 'DataController@addTrackData')->name('addtrackdatamylaps');
 Route::get('/data/addrace', 'DataController@addRace')->name('addrace');
 Route::post('/data/addraceprocess', 'DataController@addRaceProcess')->name('addraceprocess');
 Route::post('/data/addtrackdataconfirm', 'DataController@addTrackDataConfirm')->name('addtrackdataconfirm');

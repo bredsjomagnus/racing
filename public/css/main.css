@@ -1,4 +1,4 @@
-.navbar-collapse.collapse {
+@import url(https://fonts.googleapis.com/css?family=Cutive+Mono);.navbar-collapse.collapse {
   background-color: grey;
 }
 .navbar-collapse.collapse a {
@@ -33,6 +33,9 @@ h1 {
   font-family: 'Raleway', sans-serif;
   font-weight: 100;
   margin: 10px 0 20px 0;
+}
+.monoline {
+  font-family: 'Cutive Mono', monospace;
 }
 .page {
   padding-top: 50px;
@@ -74,4 +77,15 @@ hr {
 }
 .card-table td .text-info {
   font-size: 10px;
+}
+.bluecoloredrow {
+  background-color: #f3f3f3;
+  color: black;
+  padding: 5px;
+  font-size: 15px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+input .floatleft {
+  float: left;
 }

@@ -3,7 +3,7 @@
 @section('title', 'Trackdata')
 
 @section('content')
-	<h1>LÄGG TILL RACE</h1>
+	<h3>Lägg till ett race</h3>
 	<form action="{{ route('addraceprocess' )}}" method="post">
 		<table>
 			<tr>

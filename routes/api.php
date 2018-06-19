@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Models\Trackdata;
+use App\Models\Mylapsdata;
+use App\Models\Hardcarddata;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,22 +25,35 @@ Route::get('/users', function () {
 
 
 
-Route::get('/trackdata', function(){
+Route::get('/mylapsdata', function(){
 	$sortkey = $_GET['sortkey'];
 	$sortorder = $_GET['sortorder'];
 	$raceid = $_GET['raceid'];
 
-	$res = Trackdata::where('raceid', $raceid)->orderBy($sortkey, $sortorder)->get();
+	$res = Mylapsdata::where('raceid', $raceid)->orderBy($sortkey, $sortorder)->get();
 
 	return $res;
 });
 
-Route::get('/trackdata/{id}', function($id){
-	return Trackdata::find($id);
+Route::get('/mylapsdata/{id}', function($id){
+	return Mylapsdata::find($id);
 });
-Route::put('/trackdata/{id}', function(Request $request, $id) {
-    $trackdata = Trackdata::findOrFail($id);
-    $trackdata->update($request->all());
+Route::put('/mylapsdata/{id}', function(Request $request, $id) {
+    $mylapsdata = Mylapsdata::findOrFail($id);
+    $mylapsdata->update($request->all());
 
-    return $trackdata;
+    return $mylapsdata;
+});
+
+
+
+
+Route::get('/hardcarddata', function(){
+	$sortkey = $_GET['sortkey'];
+	$sortorder = $_GET['sortorder'];
+	$raceid = $_GET['raceid'];
+
+	$res = Hardcarddata::where('raceid', $raceid)->orderBy($sortkey, $sortorder)->get();
+
+	return $res;
 });

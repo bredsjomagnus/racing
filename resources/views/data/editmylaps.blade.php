@@ -4,7 +4,7 @@
 
 @section('content')
 	<h1>TRACKDATA</h1>
-	<div id='tablevue'>
+	<div id='mylapstable'>
 		<br>
 		<br>
 		<br>

@@ -1,5 +1,10 @@
-use race;
+use racing;
 
-SELECT * FROM users;
+SELECT * FROM mylapsdatas;
 
--- UPDATE users SET role = 'admin' WHERE id = 1;
+
+SELECT * FROM races;
+
+SELECT count(*) FROM racetracks;
+
+SELECT * FROM racetracks;

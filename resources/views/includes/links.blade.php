@@ -12,8 +12,8 @@
 			<li class="dropdown {{ Request::path() == 'data/addtrackdata' ? 'nav-active' : '' }}">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="{{ route('addtrackdatamylaps')}}">MYLAPS</a></li>
-					<li><a href="#">Hard Card</a></li>
+					<li><a href="{{ route('addtrackdatamylaps')}}">Mylaps</a></li>
+					<li><a href="{{ route('addtrackdatahardcard')}}">Hard Card</a></li>
 				</ul>
 			</li>
 		</ul>

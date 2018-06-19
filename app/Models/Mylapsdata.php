@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Racetrack as Racetrack;
 
-class Trackdata extends Model
+class Mylapsdata extends Model
 {
     public function inputTracks($trackarray) {
 		$trackinputs = [];
@@ -39,7 +39,7 @@ class Trackdata extends Model
 	*
 	* @return void
 	*/
-	public function insertTrackDataViaArrays($inputs, $raceid) {
+	public function insertMylapsDataViaArrays($inputs, $raceid) {
 		$racetrack = new Racetrack();
 		// str_replace(",",".",$inputs['speed'][$i]),
 		for($i = 1; $i < count($inputs['name']); $i++) {
@@ -67,7 +67,8 @@ class Trackdata extends Model
 					);
 			$racetrack::insert([
 							'raceid'				=> $raceid,
-							'trackdataid'			=> $trackdataid
+							'mylapsid'				=> $trackdataid,
+							'datatype'				=> 'mylaps'
 						]);
 		}
 	}
@@ -82,7 +83,7 @@ class Trackdata extends Model
 		return $res;
 	}
 
-	public function getAllTrackDataByRace($raceid) {
+	public function getAllMylapsDataByRace($raceid) {
 		// $racetrack = new Racetrack()
 		// $racetracks = $racetrack->getTrackDataByRaceId($raceid);
 		//

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Trackdata as Trackdata;
+use App\Models\Mylapsdata as Mylapsdata;
 use App\Models\Racetrack as Racetrack;
 use App\Models\Race as Race;
 
@@ -27,17 +27,19 @@ class HomeController extends Controller
     public function index()
     {
 		$race 		= new Race();
-		$trackdata 	= new Trackdata();
+		$mylapsdata = new Mylapsdata();
 		$racetrack 	= new Racetrack();
 
-		$numberoftrackdata = $trackdata->getNumberOfRows();
+		$numberoftrackdata = $mylapsdata->getNumberOfRows();
 
 		$races = $race->getAll();
-		$trackdataids = $racetrack->getAllTrackDataInfoByRace($races);
+		$mylapsdataids = $racetrack->getAllTrackDataInfoByRace($races, 'mylaps');
+		$hardcarddataids = $racetrack->getAllTrackDataInfoByRace($races, 'hardcard');
 
 		$data = [
 			"races"				=> $races,
-			"trackdataids"		=> $trackdataids,
+			"mylapsdataids"		=> $mylapsdataids,
+			"hardcarddataids"	=> $hardcarddataids,
 			"numberoftrackdata"	=> $numberoftrackdata
 		];
         return view('home', $data);

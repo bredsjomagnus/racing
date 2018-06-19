@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Trackdata as Trackdata;
+use App\Models\Mylapsdata as Mylapsdata;
+use App\Models\Hardcarddata as Hardcarddata;
 use App\Models\Race as Race;
 
 class DataController extends Controller
@@ -14,24 +15,49 @@ class DataController extends Controller
         $this->middleware('auth');
     }
 
-	public function addTrackData() {
-		$race = new Race();
+	public function addMylapsData(Request $request) {
+		$race 	= new Race();
 
-		$races = $race->getAll();
+		$races 	= $race->getAll();
+
+		$raceid = $request->input('raceid');
+
+		if(!isset($raceid)){
+			$raceid = 1;
+		}
 
 		$data = [
 			"trackinputs"	=> [],
 			"races"			=> $races,
-			"raceid"		=> 1
+			"raceid"		=> $raceid
 		];
-		return view('data.addtrackdatamylaps', $data);
+		return view('data.addmylapsdata', $data);
 	}
 
-	public function addTrackDataConfirm(Request $request) {
-		$trackdata 		= new Trackdata();
-		$race			= new Race();
+	public function addHardcardData(Request $request) {
+		$race 	= new Race();
+
+		$races 	= $race->getAll();
+
+		$raceid = $request->input('raceid');
+
+		if(!isset($raceid)){
+			$raceid = 1;
+		}
+
+		$data = [
+			"trackinputs"	=> [],
+			"races"			=> $races,
+			"raceid"		=> $raceid
+		];
+		return view('data.addhardcarddata', $data);
+	}
+
+	public function addMylapsDataConfirm(Request $request) {
+		$mylapsdata 		= new Mylapsdata();
+		$race				= new Race();
 		$filename = $_FILES['file']['name'];
-		// $trackdata			= new Trackdata();
+		// $Mylapsdata			= new Mylapsdata();
 		// PHP_EOL build array with End Of Line as delimiter
 		// array_filter trims array so that empty elements is removed
 		$file 			= file_get_contents($_FILES['file']['tmp_name']);
@@ -46,7 +72,7 @@ class DataController extends Controller
 		$trackimport	= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
 
 		// Skapa en assocciativ array för inputfältet.
-		$trackinputs 	= $trackdata->inputTracks($trackimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
+		$trackinputs 	= $mylapsdata->inputTracks($trackimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
 
 		$data = [
 			"filename"		=> $filename,
@@ -55,11 +81,43 @@ class DataController extends Controller
 			"raceid"		=> $raceid,
 			"raceinfo"		=> $raceinfo
 		];
-		return view('data.addtrackdatamylaps', $data);
+		return view('data.addmylapsdata', $data);
 	}
 
-	public function addTrackDataProcess(Request $request) {
-		$trackdata 					= new Trackdata();
+	public function addHardcardDataConfirm(Request $request) {
+		$hardcarddata 		= new Hardcarddata();
+		$race				= new Race();
+		$filename = $_FILES['file']['name'];
+		// $Mylapsdata			= new Mylapsdata();
+		// PHP_EOL build array with End Of Line as delimiter
+		// array_filter trims array so that empty elements is removed
+		$file 			= file_get_contents($_FILES['file']['tmp_name']);
+		$csvarray 		= explode(PHP_EOL, $file);
+		// $csvarray 			= explode(',', $file);
+
+		/*----------------------------*/
+
+		$races			= $race->getAll();
+		$raceid 		= $request->input('raceid');
+		$raceinfo 		= $race->getRace($raceid);
+		$trackimport	= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
+
+		// Skapa en assocciativ array för inputfältet.
+		$trackinputs 	= $hardcarddata->inputTracks($trackimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
+
+		$data = [
+			"csvarray"		=> $csvarray,
+			"filename"		=> $filename,
+			"trackinputs"	=> $trackinputs,
+			"races"			=> $races,
+			"raceid"		=> $raceid,
+			"raceinfo"		=> $raceinfo
+		];
+		return view('data.addhardcarddata', $data);
+	}
+
+	public function addMylapsDataProcess(Request $request) {
+		$mylapsdata 					= new Mylapsdata();
 
 		$inputs = [];
 		$inputs['no'] 				= $request->input('no');
@@ -81,23 +139,47 @@ class DataController extends Controller
 		$inputs['deleted'] 			= $request->input('deleted');
 		$raceid 					= $request->input('raceid');
 
-		$trackdata->insertTrackDataViaArrays($inputs, $raceid);
+		$mylapsdata->insertMylapsDataViaArrays($inputs, $raceid);
 		// $data = [
 		// 	"inputs"	=> $inputs
 		// ];
 		return redirect('/home');
 	}
 
-	public function editTrackData($id) {
-		$trackdata		= new Trackdata();
+	public function addHardcardDataProcess(Request $request) {
+		$hardcarddata 				= new Hardcarddata();
 
-		$res			= $trackdata->getAllTrackDataByRace($id);
+		$inputs = [];
+		$inputs['tagid'] 				= $request->input('tagid');
+		$inputs['frequency'] 			= $request->input('frequency');
+		$inputs['signalstrength'] 		= $request->input('signalstrength');
+		$inputs['antenna'] 				= $request->input('antenna');
+		$inputs['time'] 				= $request->input('time');
+		$inputs['datetime'] 			= $request->input('datetime');
+		$inputs['hits'] 				= $request->input('hits');
+		$inputs['competitorid'] 		= $request->input('competitorid');
+		$inputs['competitionnumber']	= $request->input('competitionnumber');
+		$inputs['firstname'] 			= $request->input('firstname');
+		$inputs['lastname'] 			= $request->input('lastname');
+		$inputs['lap_time'] 			= $request->input('lap_time');
+		$inputs['deleted'] 				= $request->input('deleted');
+		$raceid 						= $request->input('raceid');
 
-		$data = [
-			"res"	=> $res
-		];
+		$hardcarddata->insertHardcardDataViaArrays($inputs, $raceid);
+		// $data = [
+		// 	"inputs"	=> $inputs
+		// ];
+		return redirect('/home');
+	}
 
-		return view('data.edit', $data);
+	public function editMylapsData($id) {
+
+		return view('data.editmylaps');
+	}
+
+	public function editHardcardData($id) {
+
+		return view('data.edithardcard');
 	}
 
 	public function addRace() {
@@ -106,6 +188,13 @@ class DataController extends Controller
 
 		];
 		return view('data.addrace', $data);
+	}
+
+	public function deleteRace($id){
+		$race = new Race();
+		$race->deleteRace($id);
+
+		return redirect('/home');
 	}
 
 	public function addRaceProcess(Request $request) {

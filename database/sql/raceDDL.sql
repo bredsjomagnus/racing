@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS trackdrivers;
 DROP TABLE IF EXISTS racetracks;
 DROP TABLE IF EXISTS racedrivers;
 
-DROP TABLE IF EXISTS trackdatas;
+DROP TABLE IF EXISTS mylapsdatas;
+DROP TABLE IF EXISTS hardcarddatas;
 DROP TABLE IF EXISTS races;
 DROP TABLE IF EXISTS drivers;
 
@@ -24,7 +25,7 @@ CREATE TABLE IF NOT EXISTS races (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS trackdatas (
+CREATE TABLE IF NOT EXISTS mylapsdatas (
 	id INTEGER AUTO_INCREMENT,
     raceid INTEGER,
     `no` INTEGER,
@@ -49,6 +50,27 @@ CREATE TABLE IF NOT EXISTS trackdatas (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS hardcarddatas (
+	id INTEGER AUTO_INCREMENT,
+    raceid INTEGER,
+    tagid INTEGER,
+    frequency FLOAT,
+    signalstrength FLOAT,
+    antenna INTEGER,
+    `time` VARCHAR(255),
+    `datetime` VARCHAR(255),
+    hits INTEGER,
+    competitorid INTEGER,
+	competitionnumber INTEGER,
+    firstname VARCHAR(255),
+    lastname VARCHAR(255),
+    lap_time TIME(3),
+    `deleted` VARCHAR(255),
+    
+    FOREIGN KEY (raceid) REFERENCES races (id),
+    PRIMARY KEY (id)
+);
+
 -- CREATE TABLE IF NOT EXISTS drivers (
 -- 	id INTEGER AUTO_INCREMENT,
 --     `name` VARCHAR(255),
@@ -59,10 +81,13 @@ CREATE TABLE IF NOT EXISTS trackdatas (
 CREATE TABLE IF NOT EXISTS racetracks (
 	id INTEGER AUTO_INCREMENT,
     raceid INTEGER,
-    trackdataid INTEGER,
+    mylapsid INTEGER,
+    hardcardid INTEGER,
+    datatype VARCHAR(255),
     
     FOREIGN KEY (raceid) REFERENCES races (id),
-    FOREIGN KEY (trackdataid) REFERENCES trackdatas (id),
+    FOREIGN KEY (mylapsid) REFERENCES mylapsdatas (id),
+    FOREIGN KEY (hardcardid) REFERENCES hardcarddatas (id),
     PRIMARY KEY (id)
 );
 

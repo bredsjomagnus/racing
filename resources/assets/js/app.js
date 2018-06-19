@@ -29,8 +29,8 @@ Vue.filter('capitalize', function(value){
 	return value.toUpperCase();
 });
 
-let app = new Vue({
-	el: '#tablevue',
+let mylapsapp = new Vue({
+	el: '#mylapstable',
 
 	data: {
 		search: '',
@@ -75,9 +75,9 @@ let app = new Vue({
 			this.getSortedRes();
     	},
 		getSortedRes() {
-			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+			let url = 'http://206.81.18.153/api/mylapsdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			if(window.location.host == 'localhost') {
-				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+				url = 'http://localhost/pwww/Race/public/api/mylapsdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			}
 			axios.get(url)
 				.then(response =>
@@ -90,9 +90,81 @@ let app = new Vue({
 			this.raceid = patharray[patharray.length-1];
 
 
-			let url = 'http://206.81.18.153/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+			let url = 'http://206.81.18.153/api/mylapsdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			if(window.location.host == 'localhost') {
-				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+				url = 'http://localhost/pwww/Race/public/api/mylapsdata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+			}
+			axios.get(url)
+				.then(response =>
+					this.res = response.data
+				);
+		}
+});
+
+let hardcardapp = new Vue({
+	el: '#hardcardtable',
+
+	data: {
+		search: '',
+		raceid: '',
+		sortKey: 'time',
+		sortOrder: 'asc',
+	    reverse: false,
+	    columns: ['tagid', 'frequency', 'signalstrength', 'antenna', 'time', 'datetime', 'hits', 'competitorid', 'competitionnumber', 'firstname', 'lastname', 'lap_time', 'deleted'],
+		res: []
+	},
+	computed: {
+		filteredTracks(){
+			return this.res.filter((row) => {
+				let tagid = false;
+				let fn = false;
+				let na = false;
+				let lt = false;
+				if(row.tagid) {
+					tagid = row.tagid.toString().match(this.search);
+				}
+				if(row.firstname) {
+					fn = row.firstname.toLowerCase().toString().match(this.search.toLowerCase());
+				}
+				if(row.lastname) {
+					ln = row.lastname.toLowerCase().toString().match(this.search.toLowerCase());
+				}
+				if(row.lap_time) {
+					lt = row.lap_time.match(this.search);
+				}
+				return ( tagid || fn || ln || lt );
+			});
+		}
+	},
+	methods: {
+		sortBy(key) {
+			if (key == this.sortKey) {
+				this.sortOrder = (this.sortOrder == 'asc') ? 'desc' : 'asc';
+			} else {
+				this.sortKey = key;
+				this.sortOrder = 'asc';
+			}
+			this.getSortedRes();
+    	},
+		getSortedRes() {
+			let url = 'http://206.81.18.153/api/hardcarddata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+			if(window.location.host == 'localhost') {
+				url = 'http://localhost/pwww/Race/public/api/hardcarddata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+			}
+			axios.get(url)
+				.then(response =>
+					this.res = response.data
+				);
+		}
+  },
+	mounted() {
+			let patharray = window.location.pathname.split("/");
+			this.raceid = patharray[patharray.length-1];
+
+
+			let url = 'http://206.81.18.153/api/hardcarddata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
+			if(window.location.host == 'localhost') {
+				url = 'http://localhost/pwww/Race/public/api/hardcarddata?sortkey='+this.sortKey+'&sortorder='+this.sortOrder+'&raceid='+this.raceid;
 			}
 			axios.get(url)
 				.then(response =>

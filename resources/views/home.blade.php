@@ -44,29 +44,35 @@
 							</tr>
 							<tr>
 								<td align='right' style='padding-right: 10px'>
-									<?php $edittrackurl = url('/data/edit/trackdata/'.$race->id); ?>
-									<a class="card-link" href="{{ $edittrackurl }}">
+									<?php $editmylapsdataurl = url('/data/edit/mylapsdata/'.$race->id); ?>
+									<?php $edithardcarddataurl = url('/data/edit/hardcarddata/'.$race->id); ?>
+									<a class="card-link" href="{{ $editmylapsdataurl }}">
 										Mylaps
 									</a>
-									<span class="badge badge-primary">{{ $trackdataids[$race->id] }}</span>
+									<span class="badge badge-primary">{{ $mylapsdataids[$race->id] }}</span>
 
 									<span>&nbsp;&nbsp;</span>
 
-									<a class="card-link" href="#">
+									<a class="card-link" href="{{ $edithardcarddataurl }}">
 										Hard Card
 									</a>
-									<span class="badge badge-primary">0</span>
+									<span class="badge badge-primary">{{ $hardcarddataids[$race->id] }}</span>
 								</td>
 							</tr>
 							<tr class="spacer"></tr>
 							<tr class='racetoolsrow'>
 								<td align='right'>
 									<div class="racetools">
-										<a href="#">+ Mylaps</a>
+										<?php
+										$addmylapsurl = url('/data/addmylapsdata?raceid='.$race->id);
+										$addhardcardsurl = url('/data/addhardcarddata?raceid='.$race->id);
+										?>
+										<a href="{{ $addmylapsurl }}">+ Mylaps</a>
 										<span>&nbsp;</span>
-										<a href="#">+ Hard Card</a>
+										<a href="{{ $addhardcardsurl }}">+ Hard Card</a>
 										<span>&nbsp;</span>
-										<a href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+										<?php $deleterace = url('/data/delete/race/'.$race->id); ?>
+										<a href="{{ $deleterace }}" onclick='return confirm("Ta bort race med alla inlagda tracksdata?")'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 									</div>
 								</td>
 							</tr>

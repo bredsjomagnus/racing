@@ -13906,8 +13906,8 @@ Vue.filter('capitalize', function (value) {
 	return value.toUpperCase();
 });
 
-var app = new Vue({
-	el: '#tablevue',
+var mylapsapp = new Vue({
+	el: '#mylapstable',
 
 	data: {
 		search: '',
@@ -13956,9 +13956,9 @@ var app = new Vue({
 		getSortedRes: function getSortedRes() {
 			var _this2 = this;
 
-			var url = 'http://206.81.18.153/api/trackdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+			var url = 'http://206.81.18.153/api/mylapsdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
 			if (window.location.host == 'localhost') {
-				url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+				url = 'http://localhost/pwww/Race/public/api/mylapsdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
 			}
 			axios.get(url).then(function (response) {
 				return _this2.res = response.data;
@@ -13971,12 +13971,87 @@ var app = new Vue({
 		var patharray = window.location.pathname.split("/");
 		this.raceid = patharray[patharray.length - 1];
 
-		var url = 'http://206.81.18.153/api/trackdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+		var url = 'http://206.81.18.153/api/mylapsdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
 		if (window.location.host == 'localhost') {
-			url = 'http://localhost/pwww/Race/public/api/trackdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+			url = 'http://localhost/pwww/Race/public/api/mylapsdata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
 		}
 		axios.get(url).then(function (response) {
 			return _this3.res = response.data;
+		});
+	}
+});
+
+var hardcardapp = new Vue({
+	el: '#hardcardtable',
+
+	data: {
+		search: '',
+		raceid: '',
+		sortKey: 'time',
+		sortOrder: 'asc',
+		reverse: false,
+		columns: ['tagid', 'frequency', 'signalstrength', 'antenna', 'time', 'datetime', 'hits', 'competitorid', 'competitionnumber', 'firstname', 'lastname', 'lap_time', 'deleted'],
+		res: []
+	},
+	computed: {
+		filteredTracks: function filteredTracks() {
+			var _this4 = this;
+
+			return this.res.filter(function (row) {
+				var tagid = false;
+				var fn = false;
+				var na = false;
+				var lt = false;
+				if (row.tagid) {
+					tagid = row.tagid.toString().match(_this4.search);
+				}
+				if (row.firstname) {
+					fn = row.firstname.toLowerCase().toString().match(_this4.search.toLowerCase());
+				}
+				if (row.lastname) {
+					ln = row.lastname.toLowerCase().toString().match(_this4.search.toLowerCase());
+				}
+				if (row.lap_time) {
+					lt = row.lap_time.match(_this4.search);
+				}
+				return tagid || fn || ln || lt;
+			});
+		}
+	},
+	methods: {
+		sortBy: function sortBy(key) {
+			if (key == this.sortKey) {
+				this.sortOrder = this.sortOrder == 'asc' ? 'desc' : 'asc';
+			} else {
+				this.sortKey = key;
+				this.sortOrder = 'asc';
+			}
+			this.getSortedRes();
+		},
+		getSortedRes: function getSortedRes() {
+			var _this5 = this;
+
+			var url = 'http://206.81.18.153/api/hardcarddata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+			if (window.location.host == 'localhost') {
+				url = 'http://localhost/pwww/Race/public/api/hardcarddata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+			}
+			axios.get(url).then(function (response) {
+				return _this5.res = response.data;
+			});
+		}
+	},
+	mounted: function mounted() {
+		var _this6 = this;
+
+		var patharray = window.location.pathname.split("/");
+		this.raceid = patharray[patharray.length - 1];
+
+		var url = 'http://206.81.18.153/api/hardcarddata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+		if (window.location.host == 'localhost') {
+			url = 'http://localhost/pwww/Race/public/api/hardcarddata?sortkey=' + this.sortKey + '&sortorder=' + this.sortOrder + '&raceid=' + this.raceid;
+		}
+		axios.get(url).then(function (response) {
+			return _this6.res = response.data;
 		});
 	}
 });

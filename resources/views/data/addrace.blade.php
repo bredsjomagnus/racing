@@ -3,28 +3,28 @@
 @section('title', 'Trackdata')
 
 @section('content')
-	<h3>Lägg till ett race</h3>
-	<form action="{{ route('addraceprocess' )}}" method="post">
-		<table>
-			<tr>
-				<th>Plats*</th>
-				<th>Datum*</th>
-				<th>Väder</th>
-				<th>Temperatur</th>
-				<th></th>
-			</tr>
-			<tr>
-				<td><input class='form-control' type="text" name="place" value="" placeholder=""></td>
-				<td><input class='form-control' type="date" name="date" value=""></td>
-				<td><input class='form-control' type="text" name="weather" value="" placeholder=""></td>
-				<td><input class='form-control' type="number" name="temp" min='-50' max='50' value="" placeholder=""></td>
-				<td><input class='btn btn-primary' type="submit" name="addracebtn" value="Lägg till race"></td>
-			</tr>
-		</table>
-		<i>Plats och datum måste finnas med.</i>
-
-
-
-
-	</form>
+	<div class="newraceform">
+		<center><h2>LÄGG TILL ETT RACE</h2></center>
+		<form action="{{ route('addraceprocess' )}}" method="post">
+			<ul>
+				<li>
+					<input type="text" name="place" placeholder="Plats">
+					<span>Ange plats för racet här</span>
+				</li>
+				<li>
+					<input type="date" name="date" placeholder='Datum'>
+					<span>Ange datum för racet här</span>
+				</li>
+				<li>
+					<input type="text" name="weather" placeholder="Väder">
+					<span>Ange någon rad om vädret här</span>
+				</li>
+				<li>
+					<input class='form-control' type="number" name="temp" min='-50' max='50' placeholder="Temperatur">
+					<span>Ange temperatur vid racet här. Ett värde mellan -50 till 50 grader.</span>
+				</li>
+			</ul>
+			<input class='btn btn-primary btn-sm' type="submit" name="addracebtn" value="Lägg till race">
+		</form>
+	</div>
 @endsection

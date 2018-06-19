@@ -107,3 +107,87 @@ hr {
 input .floatleft {
   float: left;
 }
+.floatleft {
+  float: left;
+}
+.floatright {
+  float: right;
+}
+.newraceform {
+  width: 500px;
+  padding: 30px;
+  background: #FFFFFF;
+  margin: 50px auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+}
+.newraceform h2 {
+  background-color: #1d5d8c;
+  text-transform: uppercase;
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
+  padding: 20px;
+  margin: -30px -30px 30px -30px;
+}
+.newraceform input[type="text"],
+.newraceform input[type="date"],
+.newraceform input[type="datetime"],
+.newraceform input[type="email"],
+.newraceform input[type="number"],
+.newraceform input[type="search"],
+.newraceform input[type="time"],
+.newraceform input[type="url"],
+.newraceform input[type="password"],
+.newraceform textarea,
+.newraceform select {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  display: block;
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: transparent;
+  margin-bottom: 10px;
+  font: 16px Arial, Helvetica, sans-serif;
+  height: 45px;
+}
+.newraceform textarea {
+  resize: none;
+  overflow: hidden;
+}
+.newraceform ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.newraceform li {
+  display: block;
+  padding: 9px;
+  border: 1px solid #DDDDDD;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+.newraceform li > span {
+  background-color: #d5e5ea;
+  display: block;
+  padding: 3px;
+  margin: 0 -9px -9px -9px;
+  text-align: center;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+.newraceform input[type="button"],
+.newraceform input[type="submit"] {
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px 18px;
+  margin-left: 289px;
+  text-decoration: none;
+  text-transform: uppercase;
+}

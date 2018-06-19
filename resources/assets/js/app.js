@@ -172,3 +172,24 @@ let hardcardapp = new Vue({
 				);
 		}
 });
+
+let newraceformapp = new Vue(({
+	el: '#newraceform',
+	data: {
+			placeInput: '',
+			dateInput: ''
+		},
+	computed: {
+		inputClass() {
+			return {
+				notdone: this.placeInput.length == 0
+			}
+		},
+		dateClass() {
+			return {
+				notdone: this.dateInput.length == 0
+			}
+		}
+	}
+
+}));

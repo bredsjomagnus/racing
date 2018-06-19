@@ -14056,6 +14056,27 @@ var hardcardapp = new Vue({
 	}
 });
 
+var newraceformapp = new Vue({
+	el: '#newraceform',
+	data: {
+		placeInput: '',
+		dateInput: ''
+	},
+	computed: {
+		inputClass: function inputClass() {
+			return {
+				notdone: this.placeInput.length == 0
+			};
+		},
+		dateClass: function dateClass() {
+			return {
+				notdone: this.dateInput.length == 0
+			};
+		}
+	}
+
+});
+
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {

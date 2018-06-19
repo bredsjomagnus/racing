@@ -74,7 +74,7 @@
 		<script src="{{ URL::asset('js/vue-app.js') }}" type='text/javascript'></script>
 		<script src="{{ URL::asset('js/app.js') }}" type='text/javascript'></script>
 
-		@if(Request::path() == "data/addmylapsdata")
+		@if(Request::path() == "data/addmylapsdata" || Request::path() == "data/addhardcarddata")
 		<!-- Script handeling import group via .csv feature -->
 			<script src="{{ URL::asset('js/importtrackdata.js') }}" type='text/javascript'></script>
 		@endif

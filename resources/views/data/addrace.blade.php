@@ -20,11 +20,11 @@
 				</li>
 				<li>
 					<input type="text" name="weather" placeholder="Väder">
-					<span>Ange någon rad om vädret. Frivilligt.</span>
+					<span>Ange någon rad om vädret.</span>
 				</li>
 				<li>
 					<input class='form-control' type="number" name="temp" min='-50' max='50' placeholder="Temperatur">
-					<span>Ange temperatur vid racet här. Ett värde mellan -50 till 50 grader. Frivilligt.</span>
+					<span>Ange temperatur vid racet här. Ett värde mellan -50 till 50 grader.</span>
 				</li>
 			</ul>
 			<input class='btn btn-primary btn-sm' type="submit" name="addracebtn" value="Lägg till race">

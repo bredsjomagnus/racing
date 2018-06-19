@@ -13963,6 +13963,15 @@ var mylapsapp = new Vue({
 			axios.get(url).then(function (response) {
 				return _this2.res = response.data;
 			});
+		},
+		url: function url(id, action) {
+			var hrefurl = '';
+			if (window.location.host == 'localhost') {
+				hrefurl = 'http://localhost/pwww/Race/public/mylaps/' + action + '/' + id;
+			} else {
+				hrefurl = 'http://206.81.18.153/mylaps/' + action + '/' + id;
+			}
+			return hrefurl;
 		}
 	},
 	mounted: function mounted() {
@@ -14038,6 +14047,15 @@ var hardcardapp = new Vue({
 			axios.get(url).then(function (response) {
 				return _this5.res = response.data;
 			});
+		},
+		url: function url(id, action) {
+			var hrefurl = '';
+			if (window.location.host == 'localhost') {
+				hrefurl = 'http://localhost/pwww/Race/public/hardcard/' + action + '/' + id;
+			} else {
+				hrefurl = 'http://206.81.18.153/hardcard/' + action + '/' + id;
+			}
+			return hrefurl;
 		}
 	},
 	mounted: function mounted() {

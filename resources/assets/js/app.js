@@ -62,7 +62,8 @@ let mylapsapp = new Vue({
 				}
 				return ( na || sp || transp || ca );
 			});
-		}
+		},
+
 	},
 	methods: {
 		sortBy(key) {
@@ -83,6 +84,15 @@ let mylapsapp = new Vue({
 				.then(response =>
 					this.res = response.data
 				);
+		},
+		url(id, action) {
+			let hrefurl = '';
+			if(window.location.host == 'localhost') {
+				hrefurl = 'http://localhost/pwww/Race/public/mylaps/'+action+'/'+id;
+			} else {
+				hrefurl = 'http://206.81.18.153/mylaps/'+action+'/'+id;
+			}
+			return hrefurl;
 		}
   },
 	mounted() {
@@ -155,6 +165,15 @@ let hardcardapp = new Vue({
 				.then(response =>
 					this.res = response.data
 				);
+		},
+		url(id, action) {
+			let hrefurl = '';
+			if(window.location.host == 'localhost') {
+				hrefurl = 'http://localhost/pwww/Race/public/hardcard/'+action+'/'+id;
+			} else {
+				hrefurl = 'http://206.81.18.153/hardcard/'+action+'/'+id;
+			}
+			return hrefurl;
 		}
   },
 	mounted() {

@@ -3,7 +3,7 @@
 @section('title', 'Trackdata')
 
 @section('content')
-<h3>MYLAPS</h3>
+<h3 class='bluerow'>MYLAPS</h3>
 
 <a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
   Läs mer om att lägga till via csv-fil...
@@ -77,7 +77,6 @@
 			<br>
 			@if(count($trackinputs) > 0)
 				<form action="{{ route('addmylapsdataprocess') }}" method="post">
-					<input class='btn btn-primary btn-sm floatleft' type="submit" name="addtrackdatabtn" value="Lägg till trackdata">
 					<h4 class='bluecoloredrow monoline'>[Format: MYLAPS] [File: '{{trim(substr($filename, 0 , -4))}}' ({{count($trackinputs) - 1}} rader)]  [Race: {{$raceinfo->date}} - {{$raceinfo->place}}]</h4>
 					@csrf
 					<table class='table'>
@@ -91,6 +90,7 @@
 					@endforeach
 					<input type="hidden" name="raceid" value="{{$raceid}}">
 					</table>
+					<input class='btn btn-primary btn-sm floatright' type="submit" name="addtrackdatabtn" value="Lägg till trackdata">
 				</form>
 			@endif
 		</div>

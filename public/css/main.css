@@ -113,6 +113,17 @@ input .floatleft {
 .floatright {
   float: right;
 }
+.bluerow {
+  background-color: #1d5d8c;
+  color: white;
+  padding: 10px;
+}
+.lightbluerow {
+  background-color: #d5e5ea;
+}
+.headerdatarow {
+  color: #333;
+}
 .newraceform {
   width: 500px;
   padding: 30px;

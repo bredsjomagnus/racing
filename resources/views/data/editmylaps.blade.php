@@ -3,23 +3,22 @@
 @section('title', 'Trackdata')
 
 @section('content')
-	<h1>TRACKDATA</h1>
+	<h3 class='bluerow'>MYLAPS</h3>
 	<div id='mylapstable'>
-		<br>
-		<br>
-		<br>
 		<input type="text" v-model="search" class="form-control" placeholder="Filter for name, speed, transponder and class..."/>
-
+		<br>
 	    <table class="table table-striped monoline">
-
 	      <thead>
-	        <tr>
+	        <tr class='lightbluerow'>
 	          <th v-for="column in columns">
-	            <a href="#"
+	            <a class='headerdatarow' href="#"
 	               @click="sortBy(column)">
 	              @{{ column | capitalize }}
 	            </a>
 	          </th>
+			  <th colspan='3'>
+				  ACTIONS
+			  </th>
 	        </tr>
 	      </thead>
 
@@ -42,6 +41,22 @@
 	          <td>@{{ row.backup_passing_time }}</td>
 	          <td>@{{ row.class }}</td>
 	          <td>@{{ row.deleted }}</td>
+	          <td>
+				  <a :href="url(row.id, 'inspect')">
+					  <span class='glyphicon glyphicon-search'></span>
+				  </a>
+			  </td>
+	          <td>
+				  <a :href="url(row.id, 'edit')">
+					  <span class='glyphicon glyphicon-pencil'></span>
+				  </a>
+			  </td>
+	          <td>
+				  <a :href="url(row.id, 'delete')" onclick='return confirm("Vill du ta bort raden?")'>
+					  <span class='glyphicon glyphicon-trash'></span>
+				  </a>
+
+			   </td>
 	        </tr>
 	      </tbody>
 	    </table>

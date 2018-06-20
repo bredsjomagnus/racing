@@ -4,7 +4,7 @@
 
 @section('content')
 <h3>Teams</h3>
-<table>
+<table class='table table-striped'>
 	<thead>
 		<th>Team</th>
 		<th>Bilmärke</th>

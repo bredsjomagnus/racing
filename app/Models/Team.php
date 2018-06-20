@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
+	protected $fillable = ['name','carbrand', 'no', 'class'];
     public function getAll() {
 		return $this::all();
 	}
@@ -31,6 +32,24 @@ class Team extends Model
 		}
 	}
 
+	/**
+	* Insert team
+	*
+	* @param Array $teams - [0 => ['no' => no, 'name' => name, 'carbrand' => carbrand], 1 => [... ],...]
+	*
+	* @return void
+	*/
+	public function insertOneTeam($teams) {
+			$this::insert(
+			    		[
+							'name' 		=> $teams['name'],
+							'carbrand'	=> $teams['carbrand'],
+							'no' 		=> $teams['no'],
+							'class' 	=> $teams['class'],
+						]
+					);
+	}
+
 	public function inputTeams($teamimport) {
 		$teaminputs = [];
 		$teaminputdata = [];
@@ -50,5 +69,14 @@ class Team extends Model
 			}
 		}
 		return $teaminputs;
+	}
+
+	public function updateTeam($id, $field, $newvalue) {
+		$this::where('id', $id)
+          ->update([$field => $newvalue]);
+	}
+
+	public function deleteTeam($id) {
+		$this::where('id', $id)->delete();
 	}
 }

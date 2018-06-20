@@ -79,6 +79,7 @@
 			<script src="{{ URL::asset('js/importtrackdata.js') }}" type='text/javascript'></script>
 		@endif
 
+		<script src="{{ URL::asset('js/editteam.js') }}" type='text/javascript'></script>
 
 	</body>
 </html>

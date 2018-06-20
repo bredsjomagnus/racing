@@ -265,10 +265,64 @@ class DataController extends Controller
 		$inputs['class'] 	= $request->input('class');
 
 		$team->insertTeams($inputs);
-		// $data = [
-		// 	"inputs"	=> $inputs
-		//
-		// ];
-		return redirect('/home');
+
+
+		$res = $team->getAll();
+
+		$data = [
+			"res"	=> $res
+		];
+		return view('data.teams', $data);
+	}
+
+	public function editTeam(Request $request, $id) {
+		$team = new Team();
+
+		$field = $request->input('field');
+		$newvalue = $request->input('newvalue');
+
+		$team->updateTeam($id, $field, $newvalue);
+
+		$res = $team->getAll();
+
+		$data = [
+			"res"	=> $res
+		];
+
+		return view('data.teams', $data);
+	}
+
+	public function deleteTeam($id) {
+		$team = new Team();
+		$team->deleteTeam($id);
+
+		$res = $team->getAll();
+
+		$data = [
+			"res"	=> $res
+		];
+
+		return view('data.teams', $data);
+
+	}
+
+	public function addOneTeamsProcess(Request $request) {
+		$team				= new Team();
+
+		$inputs = [];
+		$inputs['no'] 		= $request->input('no');
+		$inputs['name'] 	= $request->input('name');
+		$inputs['carbrand']	= $request->input('carbrand');
+		$inputs['class'] 	= $request->input('class');
+
+		$team->insertOneTeam($inputs);
+
+
+		$res = $team->getAll();
+
+		$data = [
+			"res"	=> $res
+		];
+		return view('data.teams', $data);
 	}
 }

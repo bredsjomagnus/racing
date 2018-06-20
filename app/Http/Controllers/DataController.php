@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Mylapsdata as Mylapsdata;
 use App\Models\Hardcarddata as Hardcarddata;
 use App\Models\Race as Race;
+use App\Models\Team as Team;
 
 class DataController extends Controller
 {
@@ -210,9 +211,64 @@ class DataController extends Controller
 		} else {
 			return redirect('/data/addrace');
 		}
+	}
 
+	public function teams() {
+		$team = new Team();
+		$res = $team->getAll();
 
+		$data = [
+			"res"	=> $res
+		];
 
+		return view('data.teams', $data);
+	}
 
+	public function addTeams() {
+		$data = [
+			"teams" => []
+		];
+		return view('data.addteams', $data);
+	}
+
+	public function addTeamsConfirm(Request $request) {
+		$team	= new Team();
+		$filename = $_FILES['file']['name'];
+		// $Mylapsdata			= new Mylapsdata();
+		// PHP_EOL build array with End Of Line as delimiter
+		// array_filter trims array so that empty elements is removed
+		$file 			= file_get_contents($_FILES['file']['tmp_name']);
+		$csvarray 		= explode(PHP_EOL, $file);
+		// $csvarray 			= explode(',', $file);
+
+		/*----------------------------*/
+
+		$teamimport		= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
+
+		// Skapa en assocciativ array för inputfältet.
+		$teams 			= $team->inputTeams($teamimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
+
+		$data = [
+			"filename"		=> $filename,
+			"teams"			=> $teams,
+		];
+		return view('data.addteams', $data);
+	}
+
+	public function addTeamsProcess(Request $request) {
+		$team				= new Team();
+
+		$inputs = [];
+		$inputs['no'] 		= $request->input('no');
+		$inputs['name'] 	= $request->input('name');
+		$inputs['carbrand']	= $request->input('carbrand');
+		$inputs['class'] 	= $request->input('class');
+
+		$team->insertTeams($inputs);
+		// $data = [
+		// 	"inputs"	=> $inputs
+		//
+		// ];
+		return redirect('/home');
 	}
 }

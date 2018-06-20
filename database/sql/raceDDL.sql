@@ -11,9 +11,18 @@ DROP TABLE IF EXISTS racedrivers;
 DROP TABLE IF EXISTS mylapsdatas;
 DROP TABLE IF EXISTS hardcarddatas;
 DROP TABLE IF EXISTS races;
+DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS drivers;
 
-
+CREATE TABLE IF NOT EXISTS teams (
+	id INTEGER AUTO_INCREMENT,
+    `name` VARCHAR(255),
+    carbrand VARCHAR(255),
+    `no` INTEGER,
+    class VARCHAR(255),
+    
+    PRIMARY KEY (id)
+);
 
 CREATE TABLE IF NOT EXISTS races (
 	id INTEGER AUTO_INCREMENT,

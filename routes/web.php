@@ -34,3 +34,8 @@ Route::get('/data/addhardcarddata', 'DataController@addHardcardData')->name('add
 Route::post('/data/addhardcarddataconfirm', 'DataController@addHardcardDataConfirm')->name('addhardcarddataconfirm');
 Route::post('/data/addhardcarddataprocess', 'DataController@addHardcardDataProcess')->name('addhardcarddataprocess');
 Route::get('/data/edit/hardcarddata/{id}', 'DataController@editHardcardData')->name('edithardcarddata');
+
+Route::get('/date/teams', 'DataController@teams')->name('teams');
+Route::get('/date/addteams', 'DataController@addTeams')->name('addteams');
+Route::post('/data/addteamsconfirm', 'DataController@addTeamsConfirm')->name('addteamsconfirm');
+Route::post('/data/addteamsrocess', 'DataController@addTeamsProcess')->name('addteamsprocess');

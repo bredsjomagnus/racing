@@ -7,7 +7,11 @@
 		<p class='text-muted'>Inlagda race i databasen. Klicka länken för att se mer detaljer kring ett race.</p>
     </div>
 	<div class="row">
-
+		<?phh
+		if(isset($inputs)) {
+			var_dump($inputs);
+		}
+		?>
 		@foreach($races as $race)
 			<div class="col-md-3">
 				<div class="card">

@@ -18,6 +18,7 @@ class Team extends Model
 	* @return void
 	*/
 	public function insertTeams($teams) {
+		$this::truncate();
 		for($i = 1; $i < count($teams['no']); $i++) {
 			$this::insert(
 			    		[

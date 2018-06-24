@@ -139,6 +139,14 @@ input .floatleft {
   background-color: #1d5d8c;
   color: white;
 }
+.resulttablesubheader {
+  background-color: #d5e5ea;
+  color: #616169;
+  font-size: 12px;
+}
+.resulttable {
+  width: 60%;
+}
 .newraceform {
   width: 500px;
   padding: 30px;

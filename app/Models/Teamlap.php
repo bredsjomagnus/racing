@@ -125,11 +125,48 @@ class Teamlap extends Model
 
 		/*-------------------------------*/
 
-		$header = ['No', 'Team', 'Bil'];
+		$header = ['Pos', 'No', 'Team', 'Bilmärke'];
 		foreach($races as $racerow) {
-			$header[] = $racerow->place . ' ' . substr($racerow->date, 0, 10);
+			$header[] = $racerow->place;
 		}
 		$header[] =  'Summa';
 		return $header;
+	}
+
+	// public function getRacingHeaderFirstpart() {
+	//
+	// 	/*-------------------------------*/
+	//
+	// 	$header = ['Pos', 'No', 'Team', 'Bilmärke'];
+	//
+	// 	return $header;
+	// }
+	//
+	// public function getRacingHeaderSecondpart() {
+	// 	$race = new Race();
+	// 	$races = $race->getAll();
+	//
+	// 	/*-------------------------------*/
+	//
+	// 	foreach($races as $racerow) {
+	// 		$header[] = $racerow->place;
+	// 	}
+	// 	$header[] =  'Summa';
+	// 	return $header;
+	// }
+
+
+	public function getRacingSubHeader() {
+		$race = new Race();
+		$races = $race->getAll();
+
+		/*-------------------------------*/
+
+		$subheader = ['', '', '', ''];
+		foreach($races as $racerow) {
+			$subheader[] = substr($racerow->date, 0, 10);
+		}
+		$subheader[] =  '';
+		return $subheader;
 	}
 }

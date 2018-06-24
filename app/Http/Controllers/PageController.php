@@ -24,6 +24,9 @@ class PageController extends Controller
 		$res			= $racetrack->getNumberOfLaps('R2');
 
 		$header			= $teamlap->getRacingHeader();
+		// $headerfirstpart	= $teamlap->getRacingHeaderFirstpart();
+		// $headersecondpart	= $teamlap->getRacingHeaderSecondpart();
+		$subheader		= $teamlap->getRacingSubHeader();
 
 		$r1table 		= $teamlap->getRacingTable('R1');
 		$r2table 		= $teamlap->getRacingTable('R2');
@@ -31,6 +34,7 @@ class PageController extends Controller
 
 		$data = [
 			"header"		=> $header,
+			"subheader"		=> $subheader,
 			"r1table"		=> $r1table,
 			"r2table"		=> $r2table,
 			"standardtable"	=> $standardtable

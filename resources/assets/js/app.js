@@ -212,3 +212,24 @@ let newraceformapp = new Vue(({
 	}
 
 }));
+
+let loginformapp = new Vue(({
+	el: '#loginform',
+	data: {
+			emailInput: '',
+			passwordInput: ''
+		},
+	computed: {
+		emailClass() {
+			return {
+				notdone: !this.emailInput.includes("@")
+			}
+		},
+		passwordClass() {
+			return {
+				notdone: this.passwordInput.length == 0
+			}
+		}
+	}
+
+}));

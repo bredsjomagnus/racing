@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS hardcarddatas (
 	id INTEGER AUTO_INCREMENT,
     raceid INTEGER,
     teamid INTEGER,
+    teamtagg VARCHAR(255),
     class VARCHAR(255),
     tagid INTEGER,
     frequency FLOAT,

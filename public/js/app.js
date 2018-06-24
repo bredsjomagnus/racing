@@ -14095,6 +14095,27 @@ var newraceformapp = new Vue({
 
 });
 
+var loginformapp = new Vue({
+	el: '#loginform',
+	data: {
+		emailInput: '',
+		passwordInput: ''
+	},
+	computed: {
+		emailClass: function emailClass() {
+			return {
+				notdone: !this.emailInput.includes("@")
+			};
+		},
+		passwordClass: function passwordClass() {
+			return {
+				notdone: this.passwordInput.length == 0
+			};
+		}
+	}
+
+});
+
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {

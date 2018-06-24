@@ -6,6 +6,7 @@
 <h3>Teams</h3>
 <table class='table table-striped'>
 	<thead>
+		<th>Teamtagg</th>
 		<th>Team</th>
 		<th>Bilmärke</th>
 		<th>Nummer</th>
@@ -17,6 +18,9 @@
 $deleteteamurl = url('/data/teams/delete/'.$row->id);
 ?>
 <tr>
+	<td>
+		{{$row->teamtagg}}
+	</td>
 	<td>
 		<div id='name_{{$row->id}}' onclick="toForm('name_{{$row->id}}', {{$row->id}}, '{{$row->name}}', 'name')">{{isset($row->name) ? $row->name : '-'}}</div>
 	</td>

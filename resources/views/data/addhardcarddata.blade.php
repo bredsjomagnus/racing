@@ -40,6 +40,7 @@
 			<table width="600px">
 				<form action="{{ route('addhardcarddataconfirm') }}" method="post" enctype="multipart/form-data">
 					@csrf
+
 					<tr>
 						<td>Välj race:</td>
 						<td>
@@ -53,6 +54,18 @@
 							@else
 								Saknas racet? <a href="{{ route('addrace')}}" >Lägg till här</a>.
 							@endif
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Välj klass:
+						</td>
+						<td>
+							<select name="class">
+								<option value="R1">R1</option>
+								<option value="R2">R2</option>
+								<option value="Standard">Standard</option>
+							</select>
 						</td>
 					</tr>
 					<tr>
@@ -91,6 +104,7 @@
 						</tr>
 					@endforeach
 					<input type="hidden" name="raceid" value="{{$raceid}}">
+					<input type="hidden" name="class" value="{{$class}}">
 					</table>
 					<input class='btn btn-primary btn-sm floatright' type="submit" name="addtrackdatabtn" value="Lägg till trackdata">
 				</form>

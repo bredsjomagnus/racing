@@ -27,10 +27,13 @@ class Hardcarddata extends Model
 		return $trackinputs;
 	}
 
-	public function insertHardcardDataViaArrays($inputs, $raceid) {
-		$racetrack = new Racetrack();
+	public function insertHardcardDataViaArrays($inputs, $raceid, $class) {
+		$racetrack 	= new Racetrack();
+		$team 		= new Team();
 		// str_replace(",",".",$inputs['speed'][$i]),
 		for($i = 1; $i < count($inputs['tagid']); $i++) {
+			$teamtagg = $inputs['competitionnumber'][$i] . $class;
+			$teamid = $team->getIdNotDeletedByTeamtagg($teamtagg);
 			$trackdataid = $this::insertGetId(
 			    		[
 							'tagid' 			=> $inputs['tagid'][$i],
@@ -46,7 +49,10 @@ class Hardcarddata extends Model
 							'lastname' 			=> $inputs['lastname'][$i],
 							'lap_time' 			=> $inputs['lap_time'][$i],
 							'deleted' 			=> $inputs['deleted'][$i],
-							'raceid'			=> $raceid
+							'raceid'			=> $raceid,
+							'class'				=> $class,
+							'teamid'			=> $teamid,
+							'teamtagg'			=> $teamtagg
 						]
 					);
 			$racetrack::insert([

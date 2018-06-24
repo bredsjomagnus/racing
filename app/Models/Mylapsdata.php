@@ -40,11 +40,16 @@ class Mylapsdata extends Model
 	* @return void
 	*/
 	public function insertMylapsDataViaArrays($inputs, $raceid) {
-		$racetrack = new Racetrack();
+		$racetrack 	= new Racetrack();
+		$team		= new Team();
 		// str_replace(",",".",$inputs['speed'][$i]),
 		for($i = 1; $i < count($inputs['name']); $i++) {
+			$teamtagg = $inputs['no'][$i] . $inputs['class'][$i];
+			$teamid = $team->getIdNotDeletedByTeamtagg($teamtagg);
 			$trackdataid = $this::insertGetId(
 			    		[
+							'teamtagg'				=> $teamtagg,
+							'teamid'				=> $teamid,
 							'no' 					=> $inputs['no'][$i],
 							'name' 					=> $inputs['name'][$i],
 							'laps' 					=> $inputs['laps'][$i],

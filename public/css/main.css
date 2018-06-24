@@ -15,6 +15,17 @@
 .top-right li a {
   color: white;
 }
+.front-top-right {
+  position: absolute;
+  right: 10px;
+  top: 18px;
+}
+.front-top-right a {
+  color: black;
+}
+.front-top-right li a {
+  color: black;
+}
 .nav-active {
   background-color: black;
 }
@@ -37,7 +48,7 @@ h1 {
 .monoline {
   font-family: 'Cutive Mono', monospace;
 }
-.page {
+#page {
   padding-top: 50px;
 }
 .testroot {
@@ -123,6 +134,10 @@ input .floatleft {
 }
 .headerdatarow {
   color: #333;
+}
+.resulttableheader {
+  background-color: #1d5d8c;
+  color: white;
 }
 .newraceform {
   width: 500px;

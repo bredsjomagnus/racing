@@ -2,6 +2,9 @@
 	<div id="navbar" class="navbar-collapse collapse">
 
 		<ul class="nav navbar-nav mainna">
+			<li>
+				<a href="{{ route('welcome')}}" >Home</a>
+			</li>
 			<li {{ Request::path() == "home" ? 'class=nav-active' : '' }}>
 				<a href="{{ route('home')}}" >Dashboard</a>
 			</li>

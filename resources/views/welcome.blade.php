@@ -1,97 +1,67 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.frontsidelayout')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+<center>
+<h2>KLASS R1 - {{date('Y')}}</h2>
+<table class='table table-striped'>
+	<thead>
+		<tr class='resulttableheader'>
+			@foreach($header as $headerrow)
+				<th>{{$headerrow}}</th>
+			@endforeach
+		</tr>
+	</thead>
+	<tbody>
+		@foreach($r1table as $r1row)
+			<tr>
+			@foreach($r1row as $row)
+				<td>{{$row}}</td>
+			@endforeach
+			</tr>
+		@endforeach
+	</tbody>
+</table>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+<h3>KLASS R2 - {{date('Y')}}</h3>
+<table class='table table-striped'>
+	<thead>
+		<tr class='resulttableheader'>
+			@foreach($header as $headerrow)
+				<th>{{$headerrow}}</th>
+			@endforeach
+		</tr>
+	</thead>
+	<tbody>
+		@foreach($r2table as $r2row)
+			<tr>
+			@foreach($r2row as $row)
+				<td>{{$row}}</td>
+			@endforeach
+			</tr>
+		@endforeach
+	</tbody>
+</table>
 
-            .full-height {
-                height: 100vh;
-            }
+<h3>KLASS STANDARD - {{date('Y')}}</h3>
+<table class='table table-striped'>
+	<thead>
+		<tr class='resulttableheader'>
+			@foreach($header as $headerrow)
+				<th>{{$headerrow}}</th>
+			@endforeach
+		</tr>
+	</thead>
+	<tbody>
+		@foreach($standardtable as $standardrow)
+			<tr>
+			@foreach($standardrow as $row)
+				<td>{{$row}}</td>
+			@endforeach
+			</tr>
+		@endforeach
+	</tbody>
+</table>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Hem</a>
-                    @else
-                        <a href="{{ route('login') }}">Logga in</a>
-                        <a href="{{ route('register') }}">Registrera</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    RACING DATABAS
-                </div>
-				<center>
-					<i>Välkomstvy. Information skall läggas in. Sidan kommer vara tillänglig för alla besöker.</i>
-<!--
-               <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div> -->
-            </div>
-        </div>
-    </body>
-</html>
+</center>
+@endsection

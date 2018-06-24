@@ -8,6 +8,7 @@ use App\Models\Mylapsdata as Mylapsdata;
 use App\Models\Hardcarddata as Hardcarddata;
 use App\Models\Race as Race;
 use App\Models\Team as Team;
+use App\Models\Teamlap as Teamlap;
 
 class DataController extends Controller
 {
@@ -100,6 +101,7 @@ class DataController extends Controller
 
 		$races			= $race->getAll();
 		$raceid 		= $request->input('raceid');
+		$class			= $request->input('class');
 		$raceinfo 		= $race->getRace($raceid);
 		$trackimport	= array_filter($csvarray); // en rå array med varje rad som en string för filen per index.
 
@@ -112,13 +114,15 @@ class DataController extends Controller
 			"trackinputs"	=> $trackinputs,
 			"races"			=> $races,
 			"raceid"		=> $raceid,
-			"raceinfo"		=> $raceinfo
+			"raceinfo"		=> $raceinfo,
+			"class"			=> $class
 		];
 		return view('data.addhardcarddata', $data);
 	}
 
 	public function addMylapsDataProcess(Request $request) {
-		$mylapsdata 					= new Mylapsdata();
+		$mylapsdata 				= new Mylapsdata();
+		$teamlap 					= new Teamlap();
 
 		$inputs = [];
 		$inputs['no'] 				= $request->input('no');
@@ -140,7 +144,10 @@ class DataController extends Controller
 		$inputs['deleted'] 			= $request->input('deleted');
 		$raceid 					= $request->input('raceid');
 
+
 		$mylapsdata->insertMylapsDataViaArrays($inputs, $raceid);
+		$teamlap->addTeamLaps($raceid);
+
 		// $data = [
 		// 	"inputs"	=> $inputs
 		// ];
@@ -149,6 +156,7 @@ class DataController extends Controller
 
 	public function addHardcardDataProcess(Request $request) {
 		$hardcarddata 				= new Hardcarddata();
+		$teamlap 					= new Teamlap();
 
 		$inputs = [];
 		$inputs['tagid'] 				= $request->input('tagid');
@@ -165,8 +173,10 @@ class DataController extends Controller
 		$inputs['lap_time'] 			= $request->input('lap_time');
 		$inputs['deleted'] 				= $request->input('deleted');
 		$raceid 						= $request->input('raceid');
+		$class 							= $request->input('class');
 
-		$hardcarddata->insertHardcardDataViaArrays($inputs, $raceid);
+		$hardcarddata->insertHardcardDataViaArrays($inputs, $raceid, $class);
+		$teamlap->addTeamLaps($raceid);
 		// $data = [
 		// 	"inputs"	=> $inputs
 		// ];
@@ -232,8 +242,8 @@ class DataController extends Controller
 	}
 
 	public function addTeamsConfirm(Request $request) {
-		$team	= new Team();
-		$filename = $_FILES['file']['name'];
+		$team			= new Team();
+		$filename 		= $_FILES['file']['name'];
 		// $Mylapsdata			= new Mylapsdata();
 		// PHP_EOL build array with End Of Line as delimiter
 		// array_filter trims array so that empty elements is removed
@@ -249,8 +259,8 @@ class DataController extends Controller
 		$teams 			= $team->inputTeams($teamimport); // [0 => ['name' = namn, 'speed' => speed,....],...]
 
 		$data = [
-			"filename"		=> $filename,
-			"teams"			=> $teams,
+			"filename"	=> $filename,
+			"teams"		=> $teams,
 		];
 		return view('data.addteams', $data);
 	}
@@ -267,7 +277,7 @@ class DataController extends Controller
 		$team->insertTeams($inputs);
 
 
-		$res = $team->getAll();
+		$res 		= $team->getAll();
 
 		$data = [
 			"res"	=> $res
@@ -276,14 +286,14 @@ class DataController extends Controller
 	}
 
 	public function editTeam(Request $request, $id) {
-		$team = new Team();
+		$team 		= new Team();
 
-		$field = $request->input('field');
-		$newvalue = $request->input('newvalue');
+		$field 		= $request->input('field');
+		$newvalue 	= $request->input('newvalue');
 
 		$team->updateTeam($id, $field, $newvalue);
 
-		$res = $team->getAll();
+		$res 		= $team->getAll();
 
 		$data = [
 			"res"	=> $res
@@ -293,10 +303,10 @@ class DataController extends Controller
 	}
 
 	public function deleteTeam($id) {
-		$team = new Team();
+		$team 		= new Team();
 		$team->deleteTeam($id);
 
-		$res = $team->getAll();
+		$res 		= $team->getAll();
 
 		$data = [
 			"res"	=> $res

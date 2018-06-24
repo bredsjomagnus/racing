@@ -26,6 +26,10 @@ class Race extends Model
 		return $this::find($raceid);
 	}
 
+	public function getClass($class) {
+		return $this::where('class', $class);
+	}
+
 	public function deleteRace($raceid) {
 		// $mylapsdata = new Mylapsdata();
 		Racetrack::where('raceid', $raceid)->delete();

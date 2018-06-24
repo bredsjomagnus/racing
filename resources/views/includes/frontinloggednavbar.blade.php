@@ -14,7 +14,7 @@
                   <img src="{{asset('img/hamburger.png')}}" class="img-responsive hamburger-icon">
                 </button>
                 @if (Route::has('login'))
-                <div class="top-right links">
+                <div class="front-top-right links">
                     @auth
                     <li style='list-style-type: none;' class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -23,7 +23,7 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">
+                                <a href="{{route('home')}}">
                                     Dashboard
                                 </a>
                             </li>
@@ -41,8 +41,8 @@
                         </ul>
                     </li>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a style='color: black' href="{{ route('login') }}">Login</a>
+                        <a style='color: black' href="{{ route('register') }}">Register</a>
                     @endauth
                 </div>
             @endif

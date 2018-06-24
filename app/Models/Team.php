@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+
+use App\Models\Teamlap as Teamlap;
 
 class Team extends Model
 {
+	use SoftDeletes;
+
 	protected $fillable = ['name','carbrand', 'no', 'class'];
+
+
     public function getAll() {
 		return $this::all();
 	}
@@ -19,16 +27,30 @@ class Team extends Model
 	* @return void
 	*/
 	public function insertTeams($teams) {
-		$this::truncate();
+		// $teamlap = new Teamlap();
+		// $teamlap::truncate();
+
+		$this->reset();
+
 		for($i = 1; $i < count($teams['no']); $i++) {
+			$teamtagg = $teams['no'][$i] . $teams['class'][$i];
 			$this::insert(
 			    		[
+							'teamtagg'	=> $teamtagg,
 							'name' 		=> $teams['name'][$i],
 							'carbrand'	=> $teams['carbrand'][$i],
 							'no' 		=> $teams['no'][$i],
 							'class' 	=> $teams['class'][$i],
 						]
 					);
+		}
+	}
+
+	public function reset() {
+		$res = $this::all();
+
+		foreach($res as $row) {
+			$row->delete();
 		}
 	}
 
@@ -40,8 +62,10 @@ class Team extends Model
 	* @return void
 	*/
 	public function insertOneTeam($teams) {
+		$teamtagg = $teams['no'][$i] + $teams['class'][$i];
 			$this::insert(
 			    		[
+							'teamtagg'	=> $teamtagg,
 							'name' 		=> $teams['name'],
 							'carbrand'	=> $teams['carbrand'],
 							'no' 		=> $teams['no'],
@@ -74,9 +98,32 @@ class Team extends Model
 	public function updateTeam($id, $field, $newvalue) {
 		$this::where('id', $id)
           ->update([$field => $newvalue]);
+		$team = $this::find($id);
+		$class = $team->class;
+		$no = $team->no;
+		$tagg = $no . $class;
+		$team->teamtagg = $tagg;
+		$team->save();
 	}
 
 	public function deleteTeam($id) {
 		$this::where('id', $id)->delete();
+	}
+
+	public function getByField($field, $value) {
+		return $this::where($field, $value)->get();
+	}
+
+	public function getIdNotDeletedByTeamtagg($teamtagg) {
+		$teamid = -1;
+		$res = $this::where('teamtagg', $teamtagg)
+						->where('deleted_at', null)
+						->get();
+
+		foreach($res as $row) {
+			$teamid = $row->id;
+		}
+		return $teamid;
+
 	}
 }

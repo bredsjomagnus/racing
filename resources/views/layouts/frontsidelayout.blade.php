@@ -38,9 +38,12 @@
     </head>
 	<body>
 		{{-- This is the main navbar --}}
-        @include('includes.inloggednavbar')
-
-		@include('includes.links')
+        @include('includes.frontinloggednavbar')
+		<!-- <div class="row">
+			<center>
+			<img src="{{ URL::asset('img/carfront.png') }}" alt="carfront">
+			</center>
+		</div> -->
 
 		<div id='page'>
 			<div class="col-md-1">

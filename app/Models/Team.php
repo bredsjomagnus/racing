@@ -33,16 +33,18 @@ class Team extends Model
 		$this->reset();
 
 		for($i = 1; $i < count($teams['no']); $i++) {
-			$teamtagg = $teams['no'][$i] . $teams['class'][$i];
-			$this::insert(
+			$teams['teamtagg'] = $teams['no'][$i] . $teams['class'][$i];
+			$teamid = $this::insertGetId(
 			    		[
-							'teamtagg'	=> $teamtagg,
+							'teamtagg'	=> $teams['teamtagg'],
 							'name' 		=> $teams['name'][$i],
 							'carbrand'	=> $teams['carbrand'][$i],
 							'no' 		=> $teams['no'][$i],
 							'class' 	=> $teams['class'][$i],
 						]
 					);
+			$teams['id'] = $teamid;
+			$teamlap->setNewTeamlaps($teams);
 		}
 	}
 

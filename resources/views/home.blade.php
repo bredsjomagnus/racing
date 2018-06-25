@@ -19,9 +19,11 @@
 						<table class='card-table'>
 							<tr class='card-title-row'>
 								<td>
+									<?php $editraceurl = url("data/edit/race/".$race->id); ?>
 									<center>
-										<h4 class="card-title">{{ $race->place }} - <small> {{ substr($race->date, 0, 10) }} </small> </h4>
+										<h4 class="card-title"> <a href="{{ $editraceurl }}" class='raceediticon'><span class='fas fa-pencil-alt'></span></a>{{ $race->place }} - <small> {{ substr($race->date, 0, 10) }} </small></h4>
 									</center>
+
 								</td>
 							</tr>
 							<tr>

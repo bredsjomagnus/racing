@@ -35,10 +35,7 @@
 	          <td>@{{ row.hits }}</td>
 	          <td>@{{ row.strength }}</td>
 	          <td>@{{ row.noice }}</td>
-	          <td>@{{ row.photocell_time }}</td>
 	          <td>@{{ row.transponder }}</td>
-	          <td>@{{ row.backup_tx }}</td>
-	          <td>@{{ row.backup_passing_time }}</td>
 	          <td>@{{ row.class }}</td>
 	          <td>@{{ row.deleted }}</td>
 	          <td>

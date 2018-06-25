@@ -13915,7 +13915,7 @@ var mylapsapp = new Vue({
 		sortKey: 'elapsed_time',
 		sortOrder: 'asc',
 		reverse: false,
-		columns: ['no', 'name', 'laps', 'lead', 'lap_time', 'speed', 'elapsed_time', 'passing_time', 'hits', 'strength', 'noice', 'photocell_time', 'transponder', 'backup_tx', 'backup_passing_time', 'class', 'deleted'],
+		columns: ['no', 'name', 'laps', 'lead', 'lap_time', 'speed', 'elapsed_time', 'passing_time', 'hits', 'strength', 'noice', 'transponder', 'class', 'deleted'],
 		res: []
 	},
 	computed: {

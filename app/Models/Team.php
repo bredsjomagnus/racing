@@ -62,16 +62,20 @@ class Team extends Model
 	* @return void
 	*/
 	public function insertOneTeam($teams) {
-		$teamtagg = $teams['no'][$i] + $teams['class'][$i];
-			$this::insert(
+		$teamlap = new Teamlap();
+		$teams['teamtagg'] = $teams['no'] . $teams['class'];
+		$teamid = $this::insertGetId(
 			    		[
-							'teamtagg'	=> $teamtagg,
+							'teamtagg'	=> $teams['teamtagg'],
 							'name' 		=> $teams['name'],
 							'carbrand'	=> $teams['carbrand'],
 							'no' 		=> $teams['no'],
 							'class' 	=> $teams['class'],
 						]
 					);
+		$teams['id'] = $teamid;
+
+		$teamlap->setNewTeamlaps($teams);
 	}
 
 	public function inputTeams($teamimport) {

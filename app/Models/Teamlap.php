@@ -169,4 +169,20 @@ class Teamlap extends Model
 		$subheader[] =  '';
 		return $subheader;
 	}
+
+	public function setNewTeamlaps($teamarray) {
+		$race = new Race();
+		$res = $race->getAll();
+		foreach($res as $row) {
+			$this::insert([
+				"teamid"	=> $teamarray['id'],
+				"teamname"	=> $teamarray['name'],
+				"carbrand"	=> $teamarray['carbrand'],
+				"raceid"	=> $row->id,
+				"teamtagg"	=> $teamarray['teamtagg'],
+				"laps"		=> 0,
+				"class"		=> $teamarray['class']
+			]);
+		}
+	}
 }

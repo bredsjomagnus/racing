@@ -30,7 +30,7 @@ class Teamlap extends Model
 		$mylapsdatacount = $racetrack->getOneTrackDataCount($raceid, 'mylaps');
 		$hardcarddatacount = $racetrack->getOneTrackDataCount($raceid, 'hardcard');
 
-		$mylapsbigger = $mylapsdatacount[$raceid] > $hardcarddatacount[$raceid];
+		$mylapsbigger = $mylapsdatacount[$raceid] >= $hardcarddatacount[$raceid];
 
 		$laps = -1;
 		foreach($teams as $row) {

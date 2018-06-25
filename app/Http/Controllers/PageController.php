@@ -32,7 +32,16 @@ class PageController extends Controller
 		$r2table 		= $teamlap->getRacingTable('R2');
 		$standardtable 	= $teamlap->getRacingTable('Standard');
 
+		$width = '40%';
+		if(isset($r1table[1])) {
+			$widthnumber 	= 40 + 6*(count($r1table[1])-4);
+			$widthnumber = $widthnumber > 100 ? 100 : $widthnumber;
+			$width = $widthnumber ."%";
+		}
+
+
 		$data = [
+			"width"			=> $width,
 			"header"		=> $header,
 			"subheader"		=> $subheader,
 			"r1table"		=> $r1table,

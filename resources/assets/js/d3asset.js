@@ -1,5 +1,4 @@
 require('./bootstrap');
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -20,6 +19,13 @@ function getPathParameter() {
 
 var raceid = getPathParameter();
 var teamid = getParameterByName('teamid');
+
+var jsonurl = '';
+if(window.location.host == 'localhost') {
+	jsonurl = 'http://localhost/pwww/Race/public/api/team/'+raceid+'?teamid='+teamid;
+} else {
+	jsonurl = 'http://206.81.18.153/api/team/'+raceid+'?teamid='+teamid;
+}
 
 console.log("teamid: " + teamid);
 console.log("raceid: " + raceid);
@@ -81,7 +87,7 @@ var line = d3.line()
 	.y(function(d) { return y(d.speed); }) // set the y values for the line generator
 	.curve(d3.curveMonotoneX); // apply smoothing to the line
 
-d3.json('http://localhost/pwww/Race/public/api/team/'+raceid+'?teamid='+teamid).then(function(data) {
+d3.json(jsonurl).then(function(data) {
 
 	var n = d3.max(data, (d) => {
 		return d.laps;

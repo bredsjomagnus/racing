@@ -27,6 +27,7 @@ Route::post('/data/addmylapsdataconfirm', 'DataController@addMylapsDataConfirm')
 Route::post('/data/addtrackdataprocess', 'DataController@addMylapsDataProcess')->name('addmylapsdataprocess');
 Route::get('/data/edit/mylapsdata/{id}', 'DataController@editMylapsData')->name('editmylapsdata');
 Route::get('/data/delete/race/{id}', 'DataController@deleteRace')->name('deleterace');
+Route::get('/data/edit/race/{id}', 'DataController@editRace')->name('editrace');
 
 Route::get('/data/addhardcarddata', 'DataController@addHardcardData')->name('addtrackdatahardcard');
 Route::post('/data/addhardcarddataconfirm', 'DataController@addHardcardDataConfirm')->name('addhardcarddataconfirm');
@@ -41,3 +42,4 @@ Route::post('/data/addoneprocess', 'DataController@addOneTeamsProcess')->name('a
 
 Route::get('/data/teams/delete/{id}', 'DataController@deleteTeam')->name('deleteteam');
 Route::post('/data/teams/edit/{id}', 'DataController@editTeam')->name('editteam');
+Route::get('/data/teamview/{id}', 'DataController@teamView')->name('teamview');

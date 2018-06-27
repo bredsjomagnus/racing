@@ -19,6 +19,11 @@ class Team extends Model
 		return $this::all();
 	}
 
+	public function getThisTeam($teamid) {
+		// Get both soft deleted and not soft deleted teams
+		return $this::withTrashed()->where('id', $teamid)->get();
+	}
+
 	/**
 	* Insert team
 	*

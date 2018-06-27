@@ -93,6 +93,15 @@ let mylapsapp = new Vue({
 				hrefurl = 'http://206.81.18.153/mylaps/'+action+'/'+id;
 			}
 			return hrefurl;
+		},
+		teamurl(id) {
+			let hrefurl = '';
+			if(window.location.host == 'localhost') {
+				hrefurl = 'http://localhost/pwww/Race/public/data/teamview/'+this.raceid+'?teamid='+id;
+			} else {
+				hrefurl = 'http://206.81.18.153/data/teamview/'+this.raceid+'?teamid='+id;
+			}
+			return hrefurl;
 		}
   },
 	mounted() {

@@ -57,3 +57,10 @@ Route::get('/hardcarddata', function(){
 
 	return $res;
 });
+
+
+Route::get('/team/{id}', function($id){
+	$teamid = $_GET['teamid'];
+	$res = Mylapsdata::where('raceid', $id)->where('teamid', $teamid)->get();
+	return $res;
+});

@@ -16,16 +16,14 @@
 	              @{{ column | capitalize }}
 	            </a>
 	          </th>
-			  <th colspan='3'>
-				  ACTIONS
-			  </th>
 	        </tr>
 	      </thead>
 
 	      <tbody>
 	        <tr v-for="row in filteredTracks">
 	          <td>@{{ row.no }}</td>
-	          <td>@{{ row.name }}</td>
+	          <td v-if='row.teamid != -1'><a :href="teamurl(row.teamid)">@{{ row.name }}</a></td>
+	          <td v-if='row.teamid == -1'>@{{ row.name }}</td>
 	          <td>@{{ row.laps }}</td>
 			  <td>@{{ row.lead }}</td>
 	          <td>@{{ row.lap_time }}</td>
@@ -38,22 +36,6 @@
 	          <td>@{{ row.transponder }}</td>
 	          <td>@{{ row.class }}</td>
 	          <td>@{{ row.deleted }}</td>
-	          <td>
-				  <a :href="url(row.id, 'inspect')">
-					  <span class='glyphicon glyphicon-search'></span>
-				  </a>
-			  </td>
-	          <td>
-				  <a :href="url(row.id, 'edit')">
-					  <span class='glyphicon glyphicon-pencil'></span>
-				  </a>
-			  </td>
-	          <td>
-				  <a :href="url(row.id, 'delete')" onclick='return confirm("Vill du ta bort raden?")'>
-					  <span class='glyphicon glyphicon-trash'></span>
-				  </a>
-
-			   </td>
 	        </tr>
 	      </tbody>
 	    </table>

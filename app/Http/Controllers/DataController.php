@@ -335,4 +335,27 @@ class DataController extends Controller
 		];
 		return view('data.teams', $data);
 	}
+
+	public function editRace($raceid) {
+		//
+	}
+
+	public function teamView(Request $request, $raceid) {
+		$team = new Team();
+		$teamid = $request->get('teamid');
+		$thisteam = $team->getThisTeam($teamid);
+
+		if($teamid != -1) {
+			$data = [
+				"raceid"	=> $raceid,
+				"thisteam"	=> $thisteam
+			];
+			return view('data.teamview', $data);
+		} else {
+			return back();
+		}
+
+
+
+	}
 }

@@ -124,7 +124,7 @@ d3.json(jsonurl).then(function (data) {
 	console.log(uniqueclasses);
 	// Formatera om data.
 	// Sätt en root node som start.
-	var formatedData = { name: raceplace };
+	var formatedData = { root: "rootelement", name: raceplace };
 	var children = [];
 	uniqueclasses.forEach(function (uc) {
 		var filterresult = data.filter(function (d) {
@@ -157,12 +157,14 @@ d3.json(jsonurl).then(function (data) {
 	//
 	var hierachy_data = d3.hierarchy(formatedData);
 	// // // console.log("nested_data: " , nested_data);
-	// console.log("hierarcy_data: " , hierachy_data);
+	console.log("hierarcy_data: ", hierachy_data);
 	// // // // var root = hierachy_data;
 	// console.log(tree(hierachy_data).links());
 	// console.log("hierachy_data.descendants(): " , hierachy_data.descendants());
 
 	//
+	// console.log("hierachy_data.ancestors: " + hierachy_data.ancestors);
+
 	var link = g.selectAll(".link").data(tree(hierachy_data).links()).enter().append("path").attr("class", "link").attr("d", d3.linkHorizontal().x(function (d) {
 		return d.y;
 	}).y(function (d) {
@@ -178,9 +180,25 @@ d3.json(jsonurl).then(function (data) {
 	node.append("circle").attr("r", 2.5);
 
 	node.append("text").attr("dy", 3).attr("x", function (d) {
-		return d.children ? -8 : 8;
+		if (d.data.root) {
+			return -8;
+		} else if (d.children) {
+			return 0;
+		} else {
+			return 8;
+		}
+	}).attr("y", function (d) {
+		return d.children && !d.data.root ? -10 : 0;
 	}).style("text-anchor", function (d) {
-		return d.children ? "end" : "start";
+		if (d.data.root) {
+			return "end";
+		} else if (d.children) {
+			return "middle";
+		} else {
+			return "start";
+		}
+	}).style("font-size", function (d) {
+		return d.children ? "11px" : "15px";
 	}).text(function (d) {
 		return d.data.laps != null ? d.data.name + " - Laps: " + d.data.laps : d.data.name;
 	});

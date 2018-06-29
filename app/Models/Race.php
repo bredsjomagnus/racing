@@ -26,7 +26,8 @@ class Race extends Model
 	}
 
 	public function getRace($raceid) {
-		return $this::where("id", $raceid)->get();
+		return $this::find($raceid);
+		// return $this::where("id", $raceid)->get();
 	}
 
 	public function getClass($class) {

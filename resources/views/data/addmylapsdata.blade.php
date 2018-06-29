@@ -77,7 +77,7 @@
 			<br>
 			@if(count($trackinputs) > 0)
 				<form action="{{ route('addmylapsdataprocess') }}" method="post">
-					<h4 class='bluecoloredrow monoline'>[Format: MYLAPS] [File: '{{trim(substr($filename, 0 , -4))}}' ({{count($trackinputs) - 1}} rader)]  [Race: {{$raceinfo->date}} - {{$raceinfo->place}}]</h4>
+					<h4 class='bluecoloredrow monoline'>[Format: MYLAPS] [File: '{{trim(substr($filename, 0 , -4))}}' ({{count($trackinputs) - 1}} rader)]  [Race: {{substr($raceinfo->date,0,10)}} - {{$raceinfo->place}}]</h4>
 					@csrf
 					<table class='table'>
 					@foreach($trackinputs as $row)

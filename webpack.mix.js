@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .js('resources/assets/js/d3asset.js', 'public/js')
+   .js('resources/assets/js/d3teamview.js', 'public/js')
+   .js('resources/assets/js/d3raceview.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .less('resources/assets/less/app.less', 'public/css/main.css');

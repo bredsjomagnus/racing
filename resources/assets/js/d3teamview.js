@@ -1,3 +1,13 @@
+/************************************
+*			ANTECKNINGAR			*
+************************************/
+// Kanske bättre att ladda ner hela
+// racets info och sen använda d3.nest
+// för att lätt få tag på varje
+// team för sig. På så vis kan man
+// jämföra sig mot andra i ett teams
+// teamview.
+
 require('./bootstrap');
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -60,27 +70,28 @@ var xAxis = g.append("g")
 	.attr("class", "x axis")
 	.attr("transform", "translate(0, "+ height +")");
 
+var yAxis = g.append("g")
+	.attr("class", "y axis");
+
 xAxis.append("text")
 	.attr("x", width/2)
-	.attr("y", height + 50)
-	.attr("font-size", "20px")
+	.attr("y", + 200)
+	.attr("font-size", "15px")
 	.attr("text-anchor", "middle")
 	.text("Varv");
 
-var yAxis = g.append("g");
-
 yAxis.append("text")
-	.attr("x", - height/2)
-	.attr("y", - 40)
-	.attr("font-size", "20px")
+	.attr("y", 6)
+	.attr("transform", "rotate(-90)")
+	.attr("font-size", "11px")
 	.attr("text-anchor", "middle")
 	.text("Hastighet (km/h)");
 
-	var x = d3.scaleLinear()
-				.range([0, width]);
+var x = d3.scaleLinear()
+			.range([0, width]);
 
-	var y = d3.scaleLinear()
-				.range([height, 0]);
+var y = d3.scaleLinear()
+			.range([height, 0]);
 
 var line = d3.line()
 	.x(function(d) { return x(d.laps); }) // set the x values for the line generator
@@ -111,8 +122,8 @@ d3.json(jsonurl).then(function(data) {
 	g.append("path")// Assign a class for styling
 		.attr("class", "line")
 		.attr("fill", "none")
-		.attr("stroke", "gray")
-		.attr("stroke-width", "3px")
+		.attr("stroke", "black")
+		.attr("stroke-width", "2px")
 		.attr("d", line(data));
 
 	// var circels = g.selectAll('circle')

@@ -43,3 +43,5 @@ Route::post('/data/addoneprocess', 'DataController@addOneTeamsProcess')->name('a
 Route::get('/data/teams/delete/{id}', 'DataController@deleteTeam')->name('deleteteam');
 Route::post('/data/teams/edit/{id}', 'DataController@editTeam')->name('editteam');
 Route::get('/data/teamview/{id}', 'DataController@teamView')->name('teamview');
+
+Route::get('/data/raceview/{id}', 'DataController@raceView')->name('raceview');

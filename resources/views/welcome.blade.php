@@ -9,11 +9,16 @@
 		<thead>
 			<tr class='resulttableheader'>
 				<?php $counter = 1; ?>
-				@foreach($header as $headerrow)
+				@foreach($header as $raceid => $headerrow)
 					@if($counter < 5)
 						<th>{{$headerrow}}</th>
 					@else
-						<th><center>{{$headerrow}}</center></th>
+						@if($raceid < 0) <!-- Not races in the header -->
+							<th><center>{{$headerrow}}</center></th>
+						@else <!-- Races in the header -->
+							<?php $raceurl = url('/data/raceview/'.$raceid); ?>
+								<th><center><a style='color: white; text-decoration: underline' href='{{$raceurl}}'>{{$headerrow}}</a></center></th>
+						@endif
 					@endif
 					<?php $counter++; ?>
 				@endforeach
@@ -51,11 +56,16 @@
 		<thead>
 			<tr class='resulttableheader'>
 				<?php $counter = 1; ?>
-				@foreach($header as $headerrow)
+				@foreach($header as $raceid => $headerrow)
 					@if($counter < 5)
 						<th>{{$headerrow}}</th>
 					@else
-						<th><center>{{$headerrow}}</center></th>
+						@if($raceid < 0) <!-- Not races in the header -->
+							<th><center>{{$headerrow}}</center></th>
+						@else <!-- Races in the header -->
+							<?php $raceurl = url('/data/raceview/'.$raceid); ?>
+								<th><center><a style='color: white; text-decoration: underline' href='{{$raceurl}}'>{{$headerrow}}</a></center></th>
+						@endif
 					@endif
 					<?php $counter++; ?>
 				@endforeach
@@ -91,11 +101,16 @@
 		<thead>
 			<tr class='resulttableheader'>
 				<?php $counter = 1; ?>
-				@foreach($header as $headerrow)
+				@foreach($header as $raceid => $headerrow)
 					@if($counter < 5)
 						<th>{{$headerrow}}</th>
 					@else
-						<th><center>{{$headerrow}}</center></th>
+						@if($raceid < 0) <!-- Not races in the header -->
+							<th><center>{{$headerrow}}</center></th>
+						@else <!-- Races in the header -->
+							<?php $raceurl = url('/data/raceview/'.$raceid); ?>
+								<th><center><a style='color: white; text-decoration: underline' href='{{$raceurl}}'>{{$headerrow}}</a></center></th>
+						@endif
 					@endif
 					<?php $counter++; ?>
 				@endforeach

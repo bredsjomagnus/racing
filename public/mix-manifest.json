@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/main.css": "/css/main.css",
     "/css/app.css": "/css/app.css",
-    "/js/d3asset.js": "/js/d3asset.js"
+    "/js/d3teamview.js": "/js/d3teamview.js",
+    "/js/d3raceview.js": "/js/d3raceview.js"
 }

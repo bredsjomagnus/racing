@@ -78,7 +78,15 @@
 
 		<script src="{{ URL::asset('js/vue-app.js') }}" type='text/javascript'></script>
 		<script src="{{ URL::asset('js/app.js') }}" type='text/javascript'></script>
-		<script src="{{ URL::asset('js/d3asset.js') }}" type='text/javascript'></script>
+		<!-- <script src="{{ URL::asset('js/d3teamview.js') }}" type='text/javascript'></script> -->
+
+		@if(count($urlsegemnts) == 3 && $urlsegemnts[0] == 'data' && $urlsegemnts[1] == 'raceview')
+			<script src="{{ URL::asset('js/d3raceview.js') }}" type='text/javascript'></script>
+		@endif
+
+		@if(count($urlsegemnts) == 3 && $urlsegemnts[0] == 'data' && $urlsegemnts[1] == 'teamview')
+			<script src="{{ URL::asset('js/d3teamview.js') }}" type='text/javascript'></script>
+		@endif
 
 		@if(Request::path() == "data/addmylapsdata" || Request::path() == "data/addhardcarddata")
 		<!-- Script handeling import group via .csv feature -->

@@ -64,3 +64,9 @@ Route::get('/team/{id}', function($id){
 	$res = Mylapsdata::where('raceid', $id)->where('teamid', $teamid)->get();
 	return $res;
 });
+
+
+Route::get('/race/{id}', function($id){
+	$res = DB::table('raceview')->where('raceid', $id)->where('laps', '>', 0)->get();
+	return $res;
+});

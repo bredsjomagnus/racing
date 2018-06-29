@@ -125,11 +125,11 @@ class Teamlap extends Model
 
 		/*-------------------------------*/
 
-		$header = ['Pos', 'No', 'Team', 'Bilmärke'];
+		$header = [-4 =>'Pos',-3 => 'No',-2 => 'Team',-1 => 'Bilmärke'];
 		foreach($races as $racerow) {
-			$header[] = $racerow->place;
+			$header[$racerow->id] = $racerow->place;
 		}
-		$header[] =  'Summa';
+		$header[-5] =  'Summa';
 		return $header;
 	}
 

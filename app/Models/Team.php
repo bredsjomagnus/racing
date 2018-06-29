@@ -32,7 +32,7 @@ class Team extends Model
 	* @return void
 	*/
 	public function insertTeams($teams) {
-		// $teamlap = new Teamlap();
+		$teamlap = new Teamlap();
 		// $teamlap::truncate();
 
 		$this->reset();

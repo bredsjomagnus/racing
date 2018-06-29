@@ -51,12 +51,26 @@ d3.json(jsonurl).then(function(data){
 	var children = [];
 	uniqueclasses.forEach((uc) => {
 		const filterresult = data.filter( d => (d.class == uc) );
-		let uniqueteams = [...new Set(filterresult.map(item => item.teamname))];
-		child = { name: uc, children: uniqueteams }
+		let teams = [...(filterresult.map(item => item.teamname))];
+		let teamlaps = [...(filterresult.map(item => item.laps))];
+		// console.log("filterresult: " , filterresult);
+		// console.log("uniqueteams: " + uniqueteams);
+		// console.log("uniquelaps: " + uniquelaps);
+		var childvalue = [];
+		for(var i = 0; i < teams.length; i++) {
+			childvalue.push({
+				name: teams[i],
+				laps: teamlaps[i]
+			})
+		}
+		// uniqueteams.forEach((ut) => {
+		// 	childvalue:
+		// })
+		child = { name: uc, children: childvalue }
 		children.push(child);
 	});
 	formatedData.children = children;
-	console.log(formatedData);
+	console.log("formatedData: " , formatedData);
 	//
 	var hierachy_data = d3.hierarchy(formatedData);
 	// // // console.log("nested_data: " , nested_data);
@@ -88,7 +102,7 @@ d3.json(jsonurl).then(function(data){
       .attr("x", function(d) { return d.children ? -8 : 8; })
       .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
       .text(function(d) {
-		  return d.data.name != null ? d.data.name : d.data;
+		  return d.data.name != null ? d.data.name + " - Laps:" + d.data.laps : d.data;
 	  });
 }).catch((error) => {
 	console.log(error);

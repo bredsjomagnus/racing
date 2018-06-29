@@ -47,7 +47,7 @@ d3.json(jsonurl).then(function(data){
 	console.log(uniqueclasses);
 	// Formatera om data.
 	// Sätt en root node som start.
-	var formatedData = {name: raceplace, laps: '' };
+	var formatedData = {name: raceplace };
 	var children = [];
 	uniqueclasses.forEach((uc) => {
 		const filterresult = data.filter( d => (d.class == uc) );
@@ -102,7 +102,7 @@ d3.json(jsonurl).then(function(data){
       .attr("x", function(d) { return d.children ? -8 : 8; })
       .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
       .text(function(d) {
-		  return d.data.name != null ? d.data.name + " - Laps:" + d.data.laps : d.data;
+		  return d.data.laps != null ? d.data.name + " - Laps: " + d.data.laps : d.data.name;
 	  });
 }).catch((error) => {
 	console.log(error);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Race as Race;
+use App\Models\Team as Team;
 use App\Models\Racetrack as Racetrack;
 use App\Models\Mylapsdata as Mylapsdata;
 use App\Models\Hardcarddata as Hardcarddata;
@@ -51,5 +52,22 @@ class PageController extends Controller
 
 		return view('welcome', $data);
 		// return view('data.testrange', $data);
+	}
+
+	public function raceView($raceid) {
+		$race 			= new Race();
+		$team 			= new Team();
+
+		$thisrace 		= $race->getRace($raceid);
+		$teams			= $team->getAll();
+
+		$fastestlaps 	= $race->getTeamsBestOfRace($raceid); // Array; [teamid => [maxspeed, name], ...]
+		$data = [
+			"race"			=> $thisrace,
+			"teams"			=> $teams,
+			"fastestlaps"	=> $fastestlaps
+		];
+		return view('data.raceview', $data);
+
 	}
 }

@@ -39,6 +39,26 @@
 			<p class='text-muted'>
 				Detta är en sammanställning för detta racet. Klicka på ett av lagen för att se sammanställning för just det laget kopplat till detta racet.
 			</p>
+			<p>Då hastighet inte finns med i 'hard card'-tabellerna saknas den informationen race med den sortens track data.</p>
+			<table class='table table-striped'>
+
+					<thead>
+						<tr class='resulttableheader'>
+							<th>Team</th>
+							<th><center>Högsta hastighet</center></th>
+						</tr>
+					</thead>
+
+
+				<tbody>
+					@foreach($fastestlaps as $fastrow)
+                        <tr>
+                            <td><a href="#">{{$fastrow['name']}}</a></td>
+                            <td><center>{{$fastrow['maxspeed']}} {{$fastrow['maxspeed'] == 'Saknas för Hard Card' ? '' : 'km/h' }}</center></td>
+                        </tr>
+                    @endforeach
+				</tbody>
+			</table>
 		</div>
 	</div>
 

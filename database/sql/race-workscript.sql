@@ -2,7 +2,7 @@ use racing;
 
 SELECT * FROM mylapsdatas;
 
-SELECT * FROM mylapsdatas WHERE teamid = 4;
+SELECT DISTINCT MAX(speed) AS speed, teamid FROM mylapsdatas GROUP BY teamid ORDER BY speed DESC;
 
 SELECT * FROM hardcarddatas;
 

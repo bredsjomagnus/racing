@@ -356,16 +356,5 @@ class DataController extends Controller
 		}
 	}
 
-	public function raceView($raceid) {
-		$race = new Race();
 
-		$thisrace = $race->getRace($raceid);
-		
-
-		$data = [
-			"race"	=> $thisrace
-		];
-		return view('data.raceview', $data);
-
-	}
 }

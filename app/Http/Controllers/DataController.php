@@ -360,6 +360,7 @@ class DataController extends Controller
 		$race = new Race();
 
 		$thisrace = $race->getRace($raceid);
+		
 
 		$data = [
 			"race"	=> $thisrace

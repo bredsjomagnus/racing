@@ -12,6 +12,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+
 		<!-- not working asset -->
 		<!-- <script type="text/javascript" src="{{ asset('js/vue.js') }}"></script> -->
 
@@ -76,6 +78,10 @@
 
 		<script src="{{ URL::asset('js/vue-app.js') }}" type='text/javascript'></script>
 		<script src="{{ URL::asset('js/app.js') }}" type='text/javascript'></script>
+
+		@if(count($urlsegemnts) == 3 && $urlsegemnts[0] == 'data' && $urlsegemnts[1] == 'raceview')
+			<script src="{{ URL::asset('js/d3raceview.js') }}" type='text/javascript'></script>
+		@endif
 
 		@if(Request::path() == "data/addmylapsdata" || Request::path() == "data/addhardcarddata")
 		<!-- Script handeling import group via .csv feature -->

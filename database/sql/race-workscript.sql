@@ -2,6 +2,8 @@ use racing;
 
 SELECT * FROM mylapsdatas;
 
+SELECT * FROM mylapsdatas WHERE teamid = 4;
+
 SELECT * FROM hardcarddatas;
 
 SELECT * FROM races;
@@ -24,6 +26,8 @@ SELECT DISTINCT `no` FROM mylapsdatas WHERE class = 'R1';
 
 SELECT COUNT(*) FROM mylapsview WHERE raceid = 5 AND class='R1' AND teamnumber = 30;
 
+SELECT * FROM mylapsview;
+
 SELECT COUNT(*) FROM hardcardview WHERE raceid = 1 AND class='R2' AND teamnumber = 44;
 
 SELECT * FROM hardcardview;
@@ -36,6 +40,10 @@ SELECT * FROM teams WHERE teamtagg = '3R1';
 
 SELECT * FROM teamlaps WHERE class = 'R1';
 
+SELECT * FROM teamlaps;
+
 SELECT teamid, SUM(laps) AS sumlaps FROM teamlaps WHERE class = 'R1' GROUP BY teamid ORDER BY sumlaps DESC;
+
+SELECT * FROM raceview;
 
 -- UPDATE users SET role = 'admin' WHERE id = 1;

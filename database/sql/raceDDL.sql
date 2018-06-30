@@ -159,6 +159,20 @@ CREATE VIEW hardcardview AS
 		ON hc.raceid = r.id
 	INNER JOIN teams as t
 		ON hc.teamid = t.id;
+        
+DROP VIEW IF EXISTS raceview;
+CREATE VIEW raceview AS
+	SELECT 
+		tl.raceid AS raceid,
+        tl.class AS class,
+        tl.teamname AS teamname,
+        tl.laps	AS laps,
+        r.place AS place,
+        r.`date` AS `date`
+    FROM
+		teamlaps AS tl
+	INNER JOIN races as r
+		ON tl.raceid = r.id;
 
 
 

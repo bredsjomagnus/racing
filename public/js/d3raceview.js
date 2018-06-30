@@ -91,24 +91,37 @@ if (window.location.host == 'localhost') {
 } else {
 	jsonurl = 'http://206.81.18.153/api/race/' + raceid;
 }
-console.log(jsonurl);
-var margin = { left: 80, right: 100, top: 50, bottom: 100 },
-    height = 800 - margin.top - margin.bottom,
-    width = 800 - margin.left - margin.right;
+// console.log(jsonurl);
+var margin = { left: 100, right: 150, top: 0, bottom: 100 },
+    height = 700 - margin.top - margin.bottom,
+    width = 700 - margin.left - margin.right;
 
 var svg = d3.select("#raceview-area").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
 
 var g = svg.append("g").attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
+var size = d3.scaleLinear().range([10, 12]);
+
+var linelength = d3.scaleLinear().range([0, 140]);
+
 var tree = d3.tree().size([height, width - 300]);
 
 d3.json(jsonurl).then(function (data) {
 
-	console.log("data: ", data);
-	console.log("data: ", data[0].place);
-	console.log("data: ", data[0].date.substring(0, 10));
+	// console.log("data: " , data);
+	// console.log("data: " , data[0].place);
+	// console.log("data: " , data[0].date.substring(0,10));
 	var raceplace = data[0].place;
 
+	// Get max and min laps in race
+	var allaps = [].concat(_toConsumableArray(data.map(function (item) {
+		return item.laps;
+	})));
+	var maxlaps = Math.max.apply(Math, allaps);
+	var minlaps = Math.min.apply(Math, allaps);
+
+	size.domain([minlaps, maxlaps]);
+	linelength.domain([minlaps, maxlaps]);
 	// Ta ut alla unika klasser.
 	var uniqueclasses = [].concat(_toConsumableArray(new Set(data.map(function (item) {
 		return item.class;
@@ -121,7 +134,7 @@ d3.json(jsonurl).then(function (data) {
 	}
 	uniqueclasses.sort();
 
-	console.log(uniqueclasses);
+	// console.log(uniqueclasses);
 	// Formatera om data.
 	// Sätt en root node som start.
 	var formatedData = { root: "rootelement", name: raceplace };
@@ -153,11 +166,12 @@ d3.json(jsonurl).then(function (data) {
 		children.push(child);
 	});
 	formatedData.children = children;
-	console.log("formatedData: ", formatedData);
+	// console.log("formatedData: " , formatedData);
 	//
 	var hierachy_data = d3.hierarchy(formatedData);
+
 	// // // console.log("nested_data: " , nested_data);
-	console.log("hierarcy_data: ", hierachy_data);
+	// console.log("hierarcy_data: " , hierachy_data);
 	// // // // var root = hierachy_data;
 	// console.log(tree(hierachy_data).links());
 	// console.log("hierachy_data.descendants(): " , hierachy_data.descendants());
@@ -166,7 +180,11 @@ d3.json(jsonurl).then(function (data) {
 	// console.log("hierachy_data.ancestors: " + hierachy_data.ancestors);
 
 	var link = g.selectAll(".link").data(tree(hierachy_data).links()).enter().append("path").attr("class", "link").attr("d", d3.linkHorizontal().x(function (d) {
-		return d.y;
+		if (d.children) {
+			return d.y;
+		} else {
+			return d.y + linelength(d.data.laps);
+		}
 	}).y(function (d) {
 		return d.x;
 	}));
@@ -174,7 +192,11 @@ d3.json(jsonurl).then(function (data) {
 	var node = g.selectAll(".node").data(hierachy_data.descendants()).enter().append("g").attr("class", function (d) {
 		return "node" + (d.children ? " node--internal" : " node--leaf");
 	}).attr("transform", function (d) {
-		return "translate(" + d.y + "," + d.x + ")";
+		if (d.children) {
+			return "translate(" + d.y + "," + d.x + ")";
+		} else {
+			return "translate(" + (d.y + linelength(d.data.laps)) + "," + d.x + ")";
+		}
 	});
 
 	node.append("circle").attr("r", 2.5);
@@ -198,7 +220,7 @@ d3.json(jsonurl).then(function (data) {
 			return "start";
 		}
 	}).style("font-size", function (d) {
-		return d.children ? "11px" : "15px";
+		return d.children ? "11px" : size(d.data.laps) + "px";
 	}).text(function (d) {
 		return d.data.laps != null ? d.data.name + " - Laps: " + d.data.laps : d.data.name;
 	});
